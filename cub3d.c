@@ -6,7 +6,7 @@
 /*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:56:30 by slaajour          #+#    #+#             */
-/*   Updated: 2023/01/10 20:47:49 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/01/11 23:05:50 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,30 +28,60 @@ void	check_cub(char *str)
 	{
 		if (str[i] != comp[j])
 		{
-			write(2, "Error!\nThe file should be ending by .cub :)\n", 43);
-			exit (1);
+			printf("Error!\nThe file should be ending by .cub :)\n");
+			exit(EXIT_FAILURE);
 		}
 		i--;
 		j++;
 	}
 }
 
+char	**read_map(int fd)
+{
+	char	**splitted_map;
+	char	*line;
+	char	*map;
+
+	line = ft_strdup("");
+	map = get_next_line(fd);
+	if (map == NULL)
+	{
+		printf("Error\nEmpty map :)");
+		exit(EXIT_FAILURE);
+	}
+	while (line != NULL)
+	{
+		map = ft_strjoin(map, line);
+		free (line);
+		line = get_next_line(fd);
+	}
+	splitted_map = ft_split(map, '\n');
+	free (map);
+	return (splitted_map);
+}
+
 int	main(int argc, char **argv)
 {
 	int		fd;
+	t_game	game;
 
-	(void) argv;
 	if (argc == 2)
 	{
 		check_cub(argv[1]);
 		fd = open(argv[1], O_RDONLY);
 		if (fd < 0)
 			return (0);
+		game.map = read_map(fd);
+		directions(&game);
+		// for(int i = 0; i < 23; i++)
+		// {
+		// 	printf("%s\n", game.map[i]);
+		// }
 		// write(1, "All good bb\n", 13);
 	}
 	else
 	{
-		write(2, "Error!\nNumber of arguments is invalid :)\n", 41);
-		exit (1);
+		printf("Error!\nNumber of arguments is invalid :)\n");
+		exit(EXIT_FAILURE);
 	}
 }

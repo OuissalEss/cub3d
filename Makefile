@@ -6,11 +6,12 @@
 #    By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/10 15:43:24 by slaajour          #+#    #+#              #
-#    Updated: 2023/01/10 17:29:28 by slaajour         ###   ########.fr        #
+#    Updated: 2023/01/11 22:39:08 by slaajour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = cub3d.c
+SRCS = cub3d.c cub3d_utils.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
+		directions.c colors.c
 FLAGS = -Wall -Wextra -Werror -lmlx -framework OpenGL -framework AppKit 
 OBJS	= 	$(SRCS:.c=.o)
 
