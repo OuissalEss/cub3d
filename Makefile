@@ -6,12 +6,13 @@
 #    By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/10 15:43:24 by slaajour          #+#    #+#              #
-#    Updated: 2023/01/11 22:39:08 by slaajour         ###   ########.fr        #
+#    Updated: 2023/01/14 03:46:51 by slaajour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS = cub3d.c cub3d_utils.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
-		directions.c colors.c
+		allocation.c
+
 FLAGS = -Wall -Wextra -Werror -lmlx -framework OpenGL -framework AppKit 
 OBJS	= 	$(SRCS:.c=.o)
 
@@ -23,7 +24,7 @@ RM		= 	@rm -f
 all:	$(NAME)
 
 $(NAME):
-	@cc $(FLAGS) $(SRCS) -o $(NAME) $(DEBUG)
+	@cc $(FLAGS) $(SRCS) -o $(NAME) 
 
 bonus:
 	@cc $(FLAGS) $(SRCS_BONUS) -o $(NAME) $(DEBUG)
