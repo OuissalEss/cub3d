@@ -6,7 +6,7 @@
 /*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 03:40:36 by slaajour          #+#    #+#             */
-/*   Updated: 2023/01/15 01:07:54 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/01/18 23:19:34 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	both_malloc(t_game *game, char *av)
 	i = 0;
 	fd = open(av, O_RDONLY);
 	game->map1 = malloc(sizeof(char *) * game->len_map1 + 1);
-	while (i < game->len_map1)
+	while (i < game->len_map1 - 1)
 	{
 		game->map1[i] = get_next_line(fd);
 		i++;

@@ -6,7 +6,7 @@
 /*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:56:30 by slaajour          #+#    #+#             */
-/*   Updated: 2023/01/16 00:36:51 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/01/18 23:43:12 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,9 @@ int	main(int argc, char **argv)
 		read_file(fd, argv[1], &game);
 		both_len(&game);
 		both_malloc(&game, argv[1]);
+		flags_init(&game);
 		check_map1(&game);
-		system("leaks cub3D");
-		// for (int i = 0; i < 27; i++)
-		// {
-		// 	printf("%s", game.map[i]);
-		// }
-		// write(1, "All good bb\n", 13);
+		// system("leaks cub3D");
 	}
 	else
 	{

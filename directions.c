@@ -5,90 +5,69 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 21:51:05 by slaajour          #+#    #+#             */
-/*   Updated: 2023/01/16 00:59:19 by slaajour         ###   ########.fr       */
+/*   Created: 2023/01/11 22:37:47 by slaajour          #+#    #+#             */
+/*   Updated: 2023/01/19 00:05:53 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	flags_init(t_game *game)
+void	west_check(t_game *game, int i, int j)
 {
-	game->flag_no = 0;
-	game->flag_so = 0;
-	game->flag_ea = 0;
-	game->flag_we = 0;
-	game->flag_f = 0;
-	game->flag_c = 0;
-}
-
-void	directions(t_game *game, int i, int j)
-{
-	flags_init(game);
-	if (game->splitted_map[i][j] == 'N' && game->splitted_map[i][j + 1] == 'O')
+	if (game->flag_we == 0)
 	{
-		north_check(game);
-		printf("%d\n", game->flag_no);
+		while (game->splitted_map[i][j] == ' ')
+			j++;
+		game->flag_we++;
 	}
-	else if (game->splitted_map[i][j] == 'S'
-		&& game->splitted_map[i][j + 1] == 'O')
-		south_check(game);
-	else if (game->splitted_map[i][j] == 'W'
-		&& game->splitted_map[i][j + 1] == 'E')
-		west_check(game);
-	else if (game->splitted_map[i][j] == 'E'
-		&& game->splitted_map[i][j + 1] == 'A')
-		east_check(game);
-	else if (game->splitted_map[i][j] == 'F')
-		floor_check(game);
-	else if (game->splitted_map[i][j] == 'C')
-		ceilling_check(game);
-	else if (game->splitted_map[i][j] == '\0')
-		return ;
 	else
 	{
-		printf("Error!\nThere is an error in RGB colors or textures :)\n");
+		printf("Error\n(WE) here is writen more than once :)!\n");
 		exit(EXIT_FAILURE);
 	}
 }
 
-void	check_map1(t_game *game)
+void	east_check(t_game *game, int i, int j)
 {
-	char	*line;
-	char	*new_map;
-	int		i;
-	int		j;
-
-	i = 0;
-	line = ft_strdup("");
-	new_map = NULL;
-	while (line != NULL)
+	if (game->flag_ea == 0)
 	{
-		new_map = ft_strjoin2(new_map, line);
-		line = game->map1[i];
-		i++;
-	}
-	game->splitted_map = ft_split(new_map, '\n');
-	free(new_map);
-	i = 0;
-	while (game->splitted_map[i] != NULL)
-	{
-		j = 0;
 		while (game->splitted_map[i][j] == ' ')
 			j++;
-		directions(game, i, j);
-		i++;
+		game->flag_ea++;
+	}
+	else
+	{
+		printf("Error\n(EA) here is writen more than once :)!\n");
+		exit(EXIT_FAILURE);
 	}
 }
 
-void	north_check(t_game *game)
+void	floor_check(t_game *game, int i, int j)
 {
-	game->flag_no++;
-	// printf("%d\n", game->flag_no);
+	if (game->flag_f == 0)
+	{
+		while (game->splitted_map[i][j] == ' ')
+			j++;
+		game->flag_f++;
+	}
+	else
+	{
+		printf("Error\n(F) here is writen more than once :)!\n");
+		exit(EXIT_FAILURE);
+	}
 }
 
-void	south_check(t_game *game)
+void	ceilling_check(t_game *game, int i, int j)
 {
-	game->flag_so++;
-	printf("south\n");
+	if (game->flag_c == 0)
+	{
+		while (game->splitted_map[i][j] == ' ')
+			j++;
+		game->flag_c++;
+	}
+	else
+	{
+		printf("Error\n(C) here is writen more than once :)!\n");
+		exit(EXIT_FAILURE);
+	}
 }

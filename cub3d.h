@@ -6,7 +6,7 @@
 /*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 17:14:36 by slaajour          #+#    #+#             */
-/*   Updated: 2023/01/15 02:30:50 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/01/19 00:05:32 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ int		word_count(char *l, char c);
 char	*ft_strjoin2(char *s1, char *s2);
 
 		/* DIRECTIONS AND COLORS */
+void	flags_init(t_game *game);
 void	check_map1(t_game *game);
 void	directions(t_game *game, int i, int j);
-void	flags_init(t_game *game);
-void	north_check(t_game *game);
-void	south_check(t_game *game);
-void	west_check(t_game *game);
-void	east_check(t_game *game);
-void	floor_check(t_game *game);
-void	ceilling_check(t_game *game);
+void	north_check(t_game *game, int i, int j);
+void	south_check(t_game *game, int i, int j);
+void	west_check(t_game *game, int i, int j);
+void	east_check(t_game *game, int i, int j);
+void	floor_check(t_game *game, int i, int j);
+void	ceilling_check(t_game *game, int i, int j);
 
 #endif
