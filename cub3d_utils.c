@@ -6,7 +6,7 @@
 /*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 18:24:19 by slaajour          #+#    #+#             */
-/*   Updated: 2023/01/17 19:04:39 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/01/20 05:05:14 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,22 @@ char	**ft_split(char const *s, char c)
 	}
 	str[j] = NULL;
 	return (str);
+}
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	if (s2 == NULL)
+		return (0);
+	while (s1[i] && s2[i])
+	{
+		if (s1[i] != s2[i])
+			return (0);
+		i++;
+	}
+	if (s1[i] != '\0' || s2[i] != '\0')
+		return (0);
+	return (1);
 }

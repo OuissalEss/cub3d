@@ -6,7 +6,7 @@
 #    By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/10 15:43:24 by slaajour          #+#    #+#              #
-#    Updated: 2023/01/18 23:46:04 by slaajour         ###   ########.fr        #
+#    Updated: 2023/01/21 05:36:20 by slaajour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ DEBUG	=	-fsanitize=address -g
 RM		= 	@rm -f
 
 $(NAME) : $(OBJS)
-	$(CC) $(FLAGS) $(SRCS) -o $(NAME) $(DEBUG)
+	$(CC) $(FLAGS) $(SRCS) -o $(NAME) 
 
 all:	$(NAME)
 

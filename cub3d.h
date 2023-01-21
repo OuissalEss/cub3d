@@ -6,7 +6,7 @@
 /*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 17:14:36 by slaajour          #+#    #+#             */
-/*   Updated: 2023/01/19 00:05:32 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/01/21 04:55:21 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_game{
 	char	**map1;
 	char	**map2;
 	char	**splitted_map;
+	char	*new;
 	int		len;
 	int		len_map1;
 	int		len_map2;
@@ -49,6 +50,7 @@ char	**ft_split(char const *s, char c);
 int		word_length(char *k, int i, char c);
 int		word_count(char *l, char c);
 char	*ft_strjoin2(char *s1, char *s2);
+int		ft_strcmp(char *s1, char *s2);
 
 		/* DIRECTIONS AND COLORS */
 void	flags_init(t_game *game);
@@ -60,5 +62,6 @@ void	west_check(t_game *game, int i, int j);
 void	east_check(t_game *game, int i, int j);
 void	floor_check(t_game *game, int i, int j);
 void	ceilling_check(t_game *game, int i, int j);
+void	all_checked(t_game *game);
 
 #endif

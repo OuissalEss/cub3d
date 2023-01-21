@@ -6,7 +6,7 @@
 /*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 03:40:36 by slaajour          #+#    #+#             */
-/*   Updated: 2023/01/18 23:19:34 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/01/21 05:29:30 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	both_len(t_game *game)
 			j++;
 		if (game->map[i][j] == '1')
 		{
-			game->len_map1 = i;
+			game->len_map1 = i + 1;
 			game->len_map2 = game->len - i;
 			return (i);
 		}

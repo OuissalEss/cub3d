@@ -6,7 +6,7 @@
 /*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 21:51:05 by slaajour          #+#    #+#             */
-/*   Updated: 2023/01/19 00:10:50 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/01/21 05:51:08 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@ void	check_map1(t_game *game)
 	}
 	game->splitted_map = ft_split(new_map, '\n');
 	free(new_map);
-	i = 0;
-	while (game->splitted_map[i] != NULL)
+	i = -1;
+	while (game->splitted_map[++i])
 	{
 		j = 0;
 		while (game->splitted_map[i][j] == ' ')
 			j++;
 		directions(game, i, j);
-		i++;
 	}
+	all_checked(game);
 }
 
 void	flags_init(t_game *game)
@@ -51,8 +51,19 @@ void	flags_init(t_game *game)
 	game->flag_c = 0;
 }
 
+void	all_checked(t_game *game)
+{
+	if (game->flag_no == 0 || game->flag_so == 0 || game->flag_ea == 0
+		|| game->flag_we == 0 || game->flag_f == 0 || game->flag_c == 0)
+	{
+		printf("Error!\nSomething is missing :)\n");
+		exit(EXIT_FAILURE);
+	}
+}
+
 void	directions(t_game *game, int i, int j)
 {
+	game->new = malloc(sizeof(char) * ft_strlen(game->splitted_map[i]) + 1);
 	if (game->splitted_map[i][j] == 'N' && game->splitted_map[i][j + 1] == 'O')
 		north_check(game, i, j + 1);
 	else if (game->splitted_map[i][j] == 'S'
@@ -75,35 +86,31 @@ void	directions(t_game *game, int i, int j)
 		printf("Error!\nThere is an error in RGB colors or textures :)\n");
 		exit(EXIT_FAILURE);
 	}
+	free(game->new);
 }
 
 void	north_check(t_game *game, int i, int j)
 {
+	int		k;
+
 	if (game->flag_no == 0)
 	{
-		while (game->splitted_map[i][j] == ' ')
+		while (game->splitted_map[i][j + 1] == ' ')
 			j++;
-		if (access())
+		j++;
+		k = 0;
+		while (j <= ft_strlen(game->splitted_map[i]))
+			game->new[k++] = game->splitted_map[i][j++];
+		if (access(game->new, F_OK) == -1)
+		{
+			printf("Error\nThe file xpm doesn't really exist :)!\n");
+			exit(EXIT_FAILURE);
+		}
 		game->flag_no++;
 	}
 	else
 	{
-		printf("Error\n(NO) here is writen more than once :)!\n");
-		exit(EXIT_FAILURE);
-	}
-}
-
-void	south_check(t_game *game, int i, int j)
-{
-	if (game->flag_so == 0)
-	{
-		while (game->splitted_map[i][j] == ' ')
-			j++;
-		game->flag_so++;
-	}
-	else
-	{
-		printf("Error\n(SO) here is writen more than once :)!\n");
+		printf("Error\n(NO) here is written more than once :)!\n");
 		exit(EXIT_FAILURE);
 	}
 }
