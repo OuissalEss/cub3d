@@ -6,11 +6,11 @@
 /*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:56:30 by slaajour          #+#    #+#             */
-/*   Updated: 2023/01/21 05:39:28 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/01/22 12:33:45 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "parsing/cub3d.h"
 
 int	main(int argc, char **argv)
 {
@@ -28,6 +28,7 @@ int	main(int argc, char **argv)
 		both_malloc(&game, argv[1]);
 		flags_init(&game);
 		check_map1(&game);
+		check_map2(&game);
 		// system("leaks cub3D");
 	}
 	else

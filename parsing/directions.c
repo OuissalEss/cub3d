@@ -6,7 +6,7 @@
 /*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 22:37:47 by slaajour          #+#    #+#             */
-/*   Updated: 2023/01/21 05:52:33 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/01/22 09:48:22 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,21 +92,22 @@ void	east_check(t_game *game, int i, int j)
 
 void	floor_check(t_game *game, int i, int j)
 {
-	int	k;
+	int		k;
 
 	if (game->flag_f == 0)
 	{
+		game->string = malloc(sizeof(char) * ft_strlen(game->splitted_map[i]));
+		game->fl_cei = malloc(sizeof(char *)
+				* ft_strlen(game->splitted_map[i]));
 		while (game->splitted_map[i][j + 1] == ' ')
 			j++;
 		j++;
-		printf("%c\n", game->splitted_map[i][j]);
 		k = 0;
-		printf("%s", game->new);
 		while (j <= ft_strlen(game->splitted_map[i]))
-		{
-			game->new[k++] = game->splitted_map[i][j++];
-			printf("%c", game->new[k]);
-		}
+			game->string[k++] = game->splitted_map[i][j++];
+		game->fl_cei = ft_split(game->string, ',');
+		free (game->string);
+		norm(game);
 		game->flag_f++;
 	}
 	else
@@ -118,11 +119,20 @@ void	floor_check(t_game *game, int i, int j)
 
 void	ceilling_check(t_game *game, int i, int j)
 {
+	int	k;
+
 	if (game->flag_c == 0)
 	{
+		game->string = malloc(sizeof(char) * ft_strlen(game->splitted_map[i]));
 		while (game->splitted_map[i][j + 1] == ' ')
 			j++;
 		j++;
+		k = 0;
+		while (j <= ft_strlen(game->splitted_map[i]))
+			game->string[k++] = game->splitted_map[i][j++];
+		game->fl_cei = ft_split(game->string, ',');
+		free (game->string);
+		norm(game);
 		game->flag_c++;
 	}
 	else

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d_utils.c                                      :+:      :+:    :+:   */
+/*   cub3d_utils0.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 18:24:19 by slaajour          #+#    #+#             */
-/*   Updated: 2023/01/20 05:05:14 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/01/22 03:43:43 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	word_length(char *k, int i, char c)
 	return (j);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char *s, char c)
 {
 	char	**str;
 	int		i;
@@ -92,7 +92,7 @@ char	**ft_split(char const *s, char c)
 			i++;
 		size = word_length((char *)s, i, c);
 		str[j] = (char *)malloc(sizeof(char) * size + 1);
-		strlcpy(str[j], s + i, size + 1);
+		ft_strlcpy(str[j], s + i, size + 1);
 		i += size;
 		j++;
 	}
@@ -100,20 +100,20 @@ char	**ft_split(char const *s, char c)
 	return (str);
 }
 
-int	ft_strcmp(char *s1, char *s2)
+int	ft_strlcpy(char *dst, char *src, int dstsize)
 {
-	int	i;
+	char	*our;
+	int		i;
 
+	our = (char *)src;
 	i = 0;
-	if (s2 == NULL)
-		return (0);
-	while (s1[i] && s2[i])
+	if (dstsize == 0)
+		return (ft_strlen(our));
+	while (our[i] && i < dstsize - 1)
 	{
-		if (s1[i] != s2[i])
-			return (0);
+		dst[i] = our[i];
 		i++;
 	}
-	if (s1[i] != '\0' || s2[i] != '\0')
-		return (0);
-	return (1);
+	dst[i] = '\0';
+	return (ft_strlen(our));
 }
