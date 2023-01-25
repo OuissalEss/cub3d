@@ -6,7 +6,7 @@
 /*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:56:30 by slaajour          #+#    #+#             */
-/*   Updated: 2023/01/22 12:33:45 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/01/24 23:30:23 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	main(int argc, char **argv)
 		both_len(&game);
 		both_malloc(&game, argv[1]);
 		flags_init(&game);
-		check_map1(&game);
-		check_map2(&game);
+		check_map_data(&game);
+		check_map_values(&game);
 		// system("leaks cub3D");
 	}
 	else

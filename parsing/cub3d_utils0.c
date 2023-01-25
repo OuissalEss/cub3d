@@ -6,7 +6,7 @@
 /*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 18:24:19 by slaajour          #+#    #+#             */
-/*   Updated: 2023/01/22 03:43:43 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/01/23 20:11:51 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,24 @@ int	word_length(char *k, int i, char c)
 	return (j);
 }
 
+int	ft_strlcpy(char *dst, char *src, int dstsize)
+{
+	char	*our;
+	int		i;
+
+	our = (char *)src;
+	i = 0;
+	if (dstsize == 0)
+		return (ft_strlen(our));
+	while (our[i] && i < dstsize - 1)
+	{
+		dst[i] = our[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (ft_strlen(our));
+}
+
 char	**ft_split(char *s, char c)
 {
 	char	**str;
@@ -98,22 +116,4 @@ char	**ft_split(char *s, char c)
 	}
 	str[j] = NULL;
 	return (str);
-}
-
-int	ft_strlcpy(char *dst, char *src, int dstsize)
-{
-	char	*our;
-	int		i;
-
-	our = (char *)src;
-	i = 0;
-	if (dstsize == 0)
-		return (ft_strlen(our));
-	while (our[i] && i < dstsize - 1)
-	{
-		dst[i] = our[i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (ft_strlen(our));
 }

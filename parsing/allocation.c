@@ -6,7 +6,7 @@
 /*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 03:40:36 by slaajour          #+#    #+#             */
-/*   Updated: 2023/01/22 12:33:58 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/01/24 23:30:30 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,24 @@ void	check_cub(char *str)
 	}
 }
 
+int	len_file(char *av)
+{
+	int		i;
+	char	*str;
+	int		ffd;
+
+	ffd = open(av, O_RDONLY);
+	str = get_next_line(ffd);
+	i = 0;
+	while (str)
+	{
+		i++;
+		free(str);
+		str = get_next_line(ffd);
+	}
+	return (i);
+}
+
 void	read_file(int fd, char *av, t_game *game)
 {
 	int		i;
@@ -55,24 +73,6 @@ void	read_file(int fd, char *av, t_game *game)
 	}
 }
 
-int	len_file(char *av)
-{
-	int		i;
-	char	*str;
-	int		ffd;
-
-	ffd = open(av, O_RDONLY);
-	str = get_next_line(ffd);
-	i = 0;
-	while (str)
-	{
-		i++;
-		free(str);
-		str = get_next_line(ffd);
-	}
-	return (i);
-}
-
 int	both_len(t_game *game)
 {
 	int	i;
@@ -86,8 +86,8 @@ int	both_len(t_game *game)
 			j++;
 		if (game->map[i][j] == '1')
 		{
-			game->len_map1 = i + 1;
-			game->len_map2 = game->len - i;
+			game->len_map_data = i + 1;
+			game->len_map_values = game->len - i;
 			return (i);
 		}
 		i++;
@@ -103,18 +103,18 @@ void	both_malloc(t_game *game, char *av)
 
 	i = 0;
 	fd = open(av, O_RDONLY);
-	game->map1 = malloc(sizeof(char *) * game->len_map1 + 1);
-	while (i < game->len_map1 - 1)
+	game->map_data = malloc(sizeof(char *) * game->len_map_data + 1);
+	while (i < game->len_map_data - 1)
 	{
-		game->map1[i] = get_next_line(fd);
+		game->map_data[i] = get_next_line(fd);
 		i++;
 	}
-	game->map1[i] = NULL;
-	game->map2 = malloc(sizeof(char *) * game->len_map2 + 1);
+	game->map_data[i] = NULL;
+	game->map_values = malloc(sizeof(char *) * game->len_map_values + 1);
 	j = 0;
-	while (j < game->len_map2)
+	while (j < game->len_map_values)
 	{
-		game->map2[j] = get_next_line(fd);
+		game->map_values[j] = get_next_line(fd);
 		j++;
 	}
 }

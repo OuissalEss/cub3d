@@ -6,7 +6,7 @@
 /*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 22:37:47 by slaajour          #+#    #+#             */
-/*   Updated: 2023/01/22 09:48:22 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/01/24 21:51:11 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,15 @@ void	south_check(t_game *game, int i, int j)
 {
 	int		k;
 
+	xpm_check(game, i, j);
 	if (game->flag_so == 0)
 	{
-		while (game->splitted_map[i][j + 1] == ' ')
+		while (game->splitted[i][j + 1] == ' ')
 			j++;
 		j++;
 		k = 0;
-		while (j <= ft_strlen(game->splitted_map[i]))
-			game->new[k++] = game->splitted_map[i][j++];
+		while (j <= ft_strlen(game->splitted[i]))
+			game->new[k++] = game->splitted[i][j++];
 		if (access(game->new, F_OK) == -1)
 		{
 			printf("Error\nThe file xpm doesn't really exist :)!\n");
@@ -42,14 +43,15 @@ void	west_check(t_game *game, int i, int j)
 {
 	int		k;
 
+	xpm_check(game, i, j);
 	if (game->flag_we == 0)
 	{
-		while (game->splitted_map[i][j + 1] == ' ')
+		while (game->splitted[i][j + 1] == ' ')
 			j++;
 		j++;
 		k = 0;
-		while (j <= ft_strlen(game->splitted_map[i]))
-			game->new[k++] = game->splitted_map[i][j++];
+		while (j <= ft_strlen(game->splitted[i]))
+			game->new[k++] = game->splitted[i][j++];
 		if (access(game->new, F_OK) == -1)
 		{
 			printf("Error\nThe file xpm doesn't really exist :)!\n");
@@ -68,14 +70,15 @@ void	east_check(t_game *game, int i, int j)
 {
 	int		k;
 
+	xpm_check(game, i, j);
 	if (game->flag_ea == 0)
 	{
-		while (game->splitted_map[i][j + 1] == ' ')
+		while (game->splitted[i][j + 1] == ' ')
 			j++;
 		j++;
 		k = 0;
-		while (j <= ft_strlen(game->splitted_map[i]))
-			game->new[k++] = game->splitted_map[i][j++];
+		while (j <= ft_strlen(game->splitted[i]))
+			game->new[k++] = game->splitted[i][j++];
 		if (access(game->new, F_OK) == -1)
 		{
 			printf("Error\nThe file xpm doesn't really exist :)!\n");
@@ -96,15 +99,16 @@ void	floor_check(t_game *game, int i, int j)
 
 	if (game->flag_f == 0)
 	{
-		game->string = malloc(sizeof(char) * ft_strlen(game->splitted_map[i]));
+		game->string = malloc(sizeof(char) * ft_strlen(game->splitted[i]));
 		game->fl_cei = malloc(sizeof(char *)
-				* ft_strlen(game->splitted_map[i]));
-		while (game->splitted_map[i][j + 1] == ' ')
+				* ft_strlen(game->splitted[i]));
+		while (game->splitted[i][j + 1] == ' ')
 			j++;
 		j++;
 		k = 0;
-		while (j <= ft_strlen(game->splitted_map[i]))
-			game->string[k++] = game->splitted_map[i][j++];
+		while (j <= ft_strlen(game->splitted[i]))
+			game->string[k++] = game->splitted[i][j++];
+		semicolon(game);
 		game->fl_cei = ft_split(game->string, ',');
 		free (game->string);
 		norm(game);
@@ -123,13 +127,14 @@ void	ceilling_check(t_game *game, int i, int j)
 
 	if (game->flag_c == 0)
 	{
-		game->string = malloc(sizeof(char) * ft_strlen(game->splitted_map[i]));
-		while (game->splitted_map[i][j + 1] == ' ')
+		game->string = malloc(sizeof(char) * ft_strlen(game->splitted[i]));
+		while (game->splitted[i][j + 1] == ' ')
 			j++;
 		j++;
 		k = 0;
-		while (j <= ft_strlen(game->splitted_map[i]))
-			game->string[k++] = game->splitted_map[i][j++];
+		while (j <= ft_strlen(game->splitted[i]))
+			game->string[k++] = game->splitted[i][j++];
+		semicolon(game);
 		game->fl_cei = ft_split(game->string, ',');
 		free (game->string);
 		norm(game);
