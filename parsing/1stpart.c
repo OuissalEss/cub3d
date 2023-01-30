@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   1stmap.c                                           :+:      :+:    :+:   */
+/*   1stpart.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 21:51:05 by slaajour          #+#    #+#             */
-/*   Updated: 2023/01/24 23:29:41 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/01/30 08:28:25 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	directions(t_game *game, int i, int j)
 		return ;
 	else
 	{
-		printf("Error!\nThere is an error in RGB colors or textures :)\n");
+		printf("Error!\nThere is an error in RGB colors or textures or map :)\n");
 		exit(EXIT_FAILURE);
 	}
 	free(game->new);

@@ -6,7 +6,7 @@
 /*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 22:37:47 by slaajour          #+#    #+#             */
-/*   Updated: 2023/01/24 21:51:11 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/01/30 07:45:17 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,6 @@ void	floor_check(t_game *game, int i, int j)
 	if (game->flag_f == 0)
 	{
 		game->string = malloc(sizeof(char) * ft_strlen(game->splitted[i]));
-		game->fl_cei = malloc(sizeof(char *)
-				* ft_strlen(game->splitted[i]));
 		while (game->splitted[i][j + 1] == ' ')
 			j++;
 		j++;
@@ -109,9 +107,9 @@ void	floor_check(t_game *game, int i, int j)
 		while (j <= ft_strlen(game->splitted[i]))
 			game->string[k++] = game->splitted[i][j++];
 		semicolon(game);
-		game->fl_cei = ft_split(game->string, ',');
+		game->floor = ft_split(game->string, ',');
 		free (game->string);
-		norm(game);
+		norm_floor(game);
 		game->flag_f++;
 	}
 	else
@@ -135,9 +133,9 @@ void	ceilling_check(t_game *game, int i, int j)
 		while (j <= ft_strlen(game->splitted[i]))
 			game->string[k++] = game->splitted[i][j++];
 		semicolon(game);
-		game->fl_cei = ft_split(game->string, ',');
+		game->ceiling = ft_split(game->string, ',');
 		free (game->string);
-		norm(game);
+		norm_ceiling(game);
 		game->flag_c++;
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 17:14:36 by slaajour          #+#    #+#             */
-/*   Updated: 2023/01/24 23:30:32 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/01/30 11:08:42 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ typedef struct s_game{
 	char	**map_data;
 	char	**map_values;
 	char	**splitted;
-	char	**fl_cei;
+	char	**floor;
+	char	**ceiling;
 	char	*new;
 	char	*string;
 	int		len;
@@ -41,6 +42,13 @@ typedef struct s_game{
 	int		flag_f;
 	int		flag_c;
 }	t_game;
+
+typedef struct s_var{
+	int	var_w;
+	int	var_s;
+	int	var_n;
+	int	var_e;
+}	t_var;
 
 		/* ALLOCATION */
 void	check_cub(char *str);
@@ -61,10 +69,20 @@ void	west_check(t_game *game, int i, int j);
 void	east_check(t_game *game, int i, int j);
 void	floor_check(t_game *game, int i, int j);
 void	ceilling_check(t_game *game, int i, int j);
-void	norm(t_game *game);
-void	colors_error(void);
+void	norm_floor(t_game *game);
+void	norm_ceiling(t_game *game);
 void	semicolon(t_game *game);
 
 		/* MAP'S TURN */
 void	check_map_values(t_game *game);
+void	one_is_enough(t_game *game);
+void	check_space(t_game *game);
+int		longest_line(t_game *game);
+void	new2darr(t_game *game);
+
+		/* ERROR MESSAGES */
+void	error_wall(void);
+void	error_newline(void);
+void	error_colors(void);
+
 #endif
