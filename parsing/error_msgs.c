@@ -6,7 +6,7 @@
 /*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 05:03:19 by slaajour          #+#    #+#             */
-/*   Updated: 2023/01/30 07:14:56 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/01/31 19:19:46 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,11 @@ void	error_newline(void)
 void	error_colors(void)
 {
 	printf("Error\nSomething is wrong in colors :)!\n");
+	exit(EXIT_FAILURE);
+}
+
+void	error_position(void)
+{
+	printf("Error\nWrong position for a character :)!\n");
 	exit(EXIT_FAILURE);
 }

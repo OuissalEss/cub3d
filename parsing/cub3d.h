@@ -6,7 +6,7 @@
 /*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 17:14:36 by slaajour          #+#    #+#             */
-/*   Updated: 2023/01/30 11:08:42 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/02/01 00:08:39 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,31 +24,29 @@
 		/* ONE LOVELY CUTE LONG STRUCT */
 
 typedef struct s_game{
-	char	**map;
-	char	**map_data;
-	char	**map_values;
-	char	**splitted;
-	char	**floor;
-	char	**ceiling;
-	char	*new;
-	char	*string;
-	int		len;
-	int		len_map_data;
-	int		len_map_values;
-	int		flag_no;
-	int		flag_so;
-	int		flag_ea;
-	int		flag_we;
-	int		flag_f;
-	int		flag_c;
+	char			**map;
+	char			**map_data;
+	char			**map_values;
+	char			**splitted;
+	char			**floor;
+	char			**ceiling;
+	char			*new;
+	char			*string;
+	int				len;
+	int				len_map_data;
+	int				len_map_values;
+	int				flag_no;
+	int				flag_so;
+	int				flag_ea;
+	int				flag_we;
+	int				flag_f;
+	int				flag_c;
+	int				var;
+	int				floor_tab[3];
+	int				ceiling_tab[3];
+	unsigned int	rgb_f;
+	unsigned int	rgb_c;
 }	t_game;
-
-typedef struct s_var{
-	int	var_w;
-	int	var_s;
-	int	var_n;
-	int	var_e;
-}	t_var;
 
 		/* ALLOCATION */
 void	check_cub(char *str);
@@ -78,11 +76,17 @@ void	check_map_values(t_game *game);
 void	one_is_enough(t_game *game);
 void	check_space(t_game *game);
 int		longest_line(t_game *game);
-void	new2darr(t_game *game);
 
 		/* ERROR MESSAGES */
 void	error_wall(void);
 void	error_newline(void);
 void	error_colors(void);
+void	error_position(void);
+
+		/* PLUS_MINES */
+int		if_plus_i(t_game *game, int i, int j);
+int		if_plus_j(t_game *game, int i, int j);
+int		if_minus_i(t_game *game, int i, int j);
+int		if_minus_j(t_game *game, int i, int j);
 
 #endif

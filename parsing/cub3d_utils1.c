@@ -6,7 +6,7 @@
 /*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 03:35:55 by slaajour          #+#    #+#             */
-/*   Updated: 2023/01/30 07:44:32 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/02/01 00:09:48 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,8 @@ int	ft_atoi(char *str)
 	n = 0;
 	while (str[i] == 32)
 		i++;
-	while (str[i] == '+' || str[i] == '-')
-	{
-		if (str[i] == '-')
-			sign = sign * (-1);
+	if (str[i] == '+')
 		i++;
-	}
 	while (str[i] && str[i] >= '0' && str[i] <= '9')
 	{
 		n = n * 10 + (str[i] - '0');
@@ -42,35 +38,41 @@ int	ft_atoi(char *str)
 void	norm_floor(t_game *game)
 {
 	int		k;
-	int		number;
 
 	k = 0;
 	while (game->floor[k] != NULL)
 	{
-		number = ft_atoi(game->floor[k]);
-		if (number == -1 || number > 255 || number < 0)
+		game->floor_tab[k] = ft_atoi(game->floor[k]);
+		if (game->floor_tab[k] == -1 || game->floor_tab[k] > 255
+			|| game->floor_tab[k] < 0)
 			error_colors();
 		k++;
 	}
 	if ((k - 1) != 2)
 		error_colors();
+	game->rgb_f = 0 << 24 | game->floor_tab[0] << 16
+		| game->floor_tab[1] << 8 | game->floor_tab[2];
+	printf("%u\n", game->rgb_f);
 }
 
 void	norm_ceiling(t_game *game)
 {
 	int		k;
-	int		number;
 
 	k = 0;
 	while (game->ceiling[k] != NULL)
 	{
-		number = ft_atoi(game->ceiling[k]);
-		if (number == -1 || number > 255 || number < 0)
+		game->ceiling_tab[k] = ft_atoi(game->ceiling[k]);
+		if (game->ceiling_tab[k] == -1 || game->ceiling_tab[k] > 255
+			|| game->ceiling_tab[k] < 0)
 			error_colors();
 		k++;
 	}
 	if ((k - 1) != 2)
 		error_colors();
+	game->rgb_c = 0 << 24 | game->ceiling_tab[0] << 16
+		| game->ceiling_tab[1] << 8 | game->ceiling_tab[2];
+	printf("%u\n", game->rgb_c);
 }
 
 void	semicolon(t_game *game)

@@ -6,7 +6,7 @@
 /*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 12:23:14 by slaajour          #+#    #+#             */
-/*   Updated: 2023/01/30 11:08:58 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/01/31 22:38:14 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	all_here(t_game *game)
 	i = 0;
 	while (game->map_values[i])
 	{
-		empty_line(game, i);
+		// empty_line(game, i);
 		j = 0;
 		while (game->map_values[i][j])
 		{
@@ -116,7 +116,6 @@ void	check_map_values(t_game *game)
 	all_here(game);
 	one_is_enough(game);
 	check_wall(game);
-	sides_map(game);
+	// sides_map(game);
 	check_space(game);
-	new2darr(game);
 }

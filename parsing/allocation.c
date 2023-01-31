@@ -6,7 +6,7 @@
 /*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 03:40:36 by slaajour          #+#    #+#             */
-/*   Updated: 2023/01/29 00:56:47 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/01/31 22:50:25 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,4 +117,5 @@ void	both_malloc(t_game *game, char *av)
 		game->map_values[j] = get_next_line(fd);
 		j++;
 	}
+	game->map_values[j] = NULL;
 }

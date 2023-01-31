@@ -6,13 +6,13 @@
 /*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 22:49:21 by slaajour          #+#    #+#             */
-/*   Updated: 2023/01/30 11:10:00 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/01/31 23:09:28 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	increment(t_game *game, t_var *var)
+void	increment(t_game *game)
 {
 	int	i;
 	int	j;
@@ -23,14 +23,10 @@ void	increment(t_game *game, t_var *var)
 		j = 0;
 		while (game->map_values[i][j])
 		{
-			if (game->map_values[i][j] == 'E')
-				var->var_e++;
-			else if (game->map_values[i][j] == 'W')
-				var->var_w++;
-			else if (game->map_values[i][j] == 'N')
-				var->var_n++;
-			else if (game->map_values[i][j] == 'S')
-				var->var_s++;
+			if (game->map_values[i][j] == 'E' || game->map_values[i][j] == 'W'
+				|| game->map_values[i][j] == 'N'
+				|| game->map_values[i][j] == 'S')
+				game->var++;
 			j++;
 		}
 		i++;
@@ -39,22 +35,14 @@ void	increment(t_game *game, t_var *var)
 
 void	one_is_enough(t_game *game)
 {
-	t_var	*var;
-
-	var = malloc(sizeof(t_var));
-	var->var_e = 0;
-	var->var_w = 0;
-	var->var_s = 0;
-	var->var_n = 0;
-	increment(game, var);
-	if (var->var_e > 1 || var->var_n > 1
-		|| var->var_s > 1 || var->var_w > 1)
+	game->var = 0;
+	increment(game);
+	if (game->var > 1)
 	{
 		printf("Error!\nA position here is written more than once :)");
 		exit(EXIT_FAILURE);
 	}
-	if (var->var_e == 0 && var->var_n == 0
-		&& var->var_s == 0 && var->var_w == 0)
+	if (game->var == 0)
 	{
 		printf("Error!\nA position is missing :)");
 		exit(EXIT_FAILURE);
@@ -68,14 +56,14 @@ void	surrounding(t_game *game, int i, int j)
 			|| game->map_values[i][j] == 'E'
 			|| game->map_values[i][j] == 'W')
 	{
-		if (game->map_values[i][j - 1] == ' '
-			|| game->map_values[i][j + 1] == ' '
-			|| game->map_values[i - 1][j] == ' '
-			|| game->map_values[i + 1][j] == ' ')
-		{
-			printf("Error!\nUnnecessary space in the map :)");
-			exit(EXIT_FAILURE);
-		}
+		if (if_plus_i(game, i, j))
+			error_position();
+		if (if_plus_j(game, i, j))
+			error_position();
+		if (if_minus_j(game, i, j))
+			error_position();
+		if (if_minus_i(game, i, j))
+			error_position();
 	}
 }
 
