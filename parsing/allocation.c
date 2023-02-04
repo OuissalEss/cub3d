@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   allocation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 03:40:36 by slaajour          #+#    #+#             */
-/*   Updated: 2023/02/03 00:25:10 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/02/04 03:14:53 by oessamdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "parsing.h"
 
 void	check_cub(char *str)
 {

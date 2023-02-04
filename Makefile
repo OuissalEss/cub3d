@@ -3,39 +3,40 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+         #
+#    By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/01/10 15:43:24 by slaajour          #+#    #+#              #
-#    Updated: 2023/02/03 00:36:08 by slaajour         ###   ########.fr        #
+#    Created: 2022/02/14 08:18:27 by oessamdi          #+#    #+#              #
+#    Updated: 2023/02/04 08:38:46 by oessamdi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	cub3D
+NAME = cub3d
 
-SRCS 	=	cub3d.c parsing/cub3d_utils0.c parsing/cub3d_utils1.c parsing/get_next_line/get_next_line.c \
-			parsing/get_next_line/get_next_line_utils.c parsing/allocation.c parsing/directions.c \
-			parsing/1stpart.c parsing/2ndpart.c parsing/map_utils.c parsing/error_msgs.c \
-			parsing/plus_minus.c
+SRC = 	cub3d.c cub3d_utils.c \
+		\
+		keys_handlers.c rays.c \
+		\
+		parsing/cub3d_utils0.c parsing/cub3d_utils1.c parsing/get_next_line/get_next_line.c \
+		parsing/get_next_line/get_next_line_utils.c parsing/allocation.c parsing/directions.c \
+		parsing/1stpart.c parsing/2ndpart.c parsing/map_utils.c parsing/error_msgs.c \
+		parsing/plus_minus.c
 
-CC = @gcc
+CC = @gcc $(SRC) -fsanitize=address -g -lmlx -framework OpenGL -framework AppKit
 
-FLAGS	=	-Wall -Wextra -Werror -lmlx -framework OpenGL -framework AppKit 
+MLX_PATH = mlx
 
-OBJS	= 	$(SRCS:.c=.o)
+MAKEMLX = make -C
 
-DEBUG	=	-fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror
 
-RM		= 	@rm -f
+RM = @rm -f
 
-$(NAME) : $(OBJS)
-	$(CC) $(FLAGS) $(SRCS) -o $(NAME)
+all : $(NAME)
 
-all:	$(NAME)
+$(NAME) :
+			$(CC) -o $(NAME)
+	
+fclean :
+	$(RM) $(NAME)
 
-clean:
-	${RM} ${OBJS}
-
-fclean:	clean
-	${RM} ${NAME}
-
-re:		fclean all
+re : fclean all

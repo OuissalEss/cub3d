@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   plus_minus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 10:55:05 by slaajour          #+#    #+#             */
-/*   Updated: 2023/02/03 00:35:46 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/02/04 03:15:21 by oessamdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "parsing.h"
 
 int	if_plus_i(t_game *game, int i, int j)
 {

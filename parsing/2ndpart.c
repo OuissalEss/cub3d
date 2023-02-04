@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   2ndpart.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 12:23:14 by slaajour          #+#    #+#             */
-/*   Updated: 2023/02/03 00:33:10 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/02/04 03:14:48 by oessamdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "parsing.h"
 
 void	check_wall(t_game *game)
 {

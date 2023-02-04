@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   error_msgs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 05:03:19 by slaajour          #+#    #+#             */
-/*   Updated: 2023/01/31 19:19:46 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/02/04 03:15:10 by oessamdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "parsing.h"
 
 void	error_wall(void)
 {

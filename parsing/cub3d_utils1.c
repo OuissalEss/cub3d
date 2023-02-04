@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_utils1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 03:35:55 by slaajour          #+#    #+#             */
-/*   Updated: 2023/02/03 00:25:30 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/02/04 03:15:01 by oessamdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "parsing.h"
 
 int	ft_atoi(char *str)
 {
