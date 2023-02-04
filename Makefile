@@ -6,7 +6,7 @@
 #    By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/10 15:43:24 by slaajour          #+#    #+#              #
-#    Updated: 2023/01/31 22:24:56 by slaajour         ###   ########.fr        #
+#    Updated: 2023/02/03 00:36:08 by slaajour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@ NAME	=	cub3D
 
 SRCS 	=	cub3d.c parsing/cub3d_utils0.c parsing/cub3d_utils1.c parsing/get_next_line/get_next_line.c \
 			parsing/get_next_line/get_next_line_utils.c parsing/allocation.c parsing/directions.c \
-			parsing/1stpart.c parsing/2ndpart.c parsing/map_utils0.c parsing/error_msgs.c \
-			parsing/map_utils1.c
+			parsing/1stpart.c parsing/2ndpart.c parsing/map_utils.c parsing/error_msgs.c \
+			parsing/plus_minus.c
 
 CC = @gcc
 

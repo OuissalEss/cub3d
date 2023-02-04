@@ -6,7 +6,7 @@
 /*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 17:14:36 by slaajour          #+#    #+#             */
-/*   Updated: 2023/02/01 00:08:39 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/02/03 00:34:50 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,7 @@ void	semicolon(t_game *game);
 
 		/* MAP'S TURN */
 void	check_map_values(t_game *game);
-void	one_is_enough(t_game *game);
 void	check_space(t_game *game);
-int		longest_line(t_game *game);
 
 		/* ERROR MESSAGES */
 void	error_wall(void);

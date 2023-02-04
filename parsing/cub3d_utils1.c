@@ -6,7 +6,7 @@
 /*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 03:35:55 by slaajour          #+#    #+#             */
-/*   Updated: 2023/02/01 00:09:48 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/02/03 00:25:30 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	norm_floor(t_game *game)
 		error_colors();
 	game->rgb_f = 0 << 24 | game->floor_tab[0] << 16
 		| game->floor_tab[1] << 8 | game->floor_tab[2];
-	printf("%u\n", game->rgb_f);
 }
 
 void	norm_ceiling(t_game *game)
@@ -72,7 +71,6 @@ void	norm_ceiling(t_game *game)
 		error_colors();
 	game->rgb_c = 0 << 24 | game->ceiling_tab[0] << 16
 		| game->ceiling_tab[1] << 8 | game->ceiling_tab[2];
-	printf("%u\n", game->rgb_c);
 }
 
 void	semicolon(t_game *game)
