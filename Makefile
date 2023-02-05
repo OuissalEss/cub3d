@@ -6,13 +6,13 @@
 #    By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/14 08:18:27 by oessamdi          #+#    #+#              #
-#    Updated: 2023/02/04 08:38:46 by oessamdi         ###   ########.fr        #
+#    Updated: 2023/02/05 09:36:12 by oessamdi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 
-SRC = 	cub3d.c cub3d_utils.c \
+SRC = 	cub3d.c cub3d_utils.c player.c init_data.c render_3d.c casting.c \
 		\
 		keys_handlers.c rays.c \
 		\
@@ -21,7 +21,7 @@ SRC = 	cub3d.c cub3d_utils.c \
 		parsing/1stpart.c parsing/2ndpart.c parsing/map_utils.c parsing/error_msgs.c \
 		parsing/plus_minus.c
 
-CC = @gcc $(SRC) -fsanitize=address -g -lmlx -framework OpenGL -framework AppKit
+CC = @gcc $(SRC) -lmlx -framework OpenGL -framework AppKit
 
 MLX_PATH = mlx
 

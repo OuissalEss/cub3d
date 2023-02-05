@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/05 08:01:17 by oessamdi          #+#    #+#             */
+/*   Updated: 2023/02/05 09:36:58 by oessamdi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -26,7 +38,13 @@
 # define RIGHT_ARROW 124
 # define LEFT_ARROW 123
 
-# define tail 32
+# define TAIL 32
+# define MAPWIDTH 24
+# define MAPHEIGHT 24
+
+// # define WIN_H (mapHeight * TAIL)
+// # define WIN_W (mapWidth * TAIL)
+
 # define WIN_H 1000
 # define WIN_W 1000
 
@@ -34,10 +52,12 @@
 # define WALL_STRIP_WIDTH 1
 # define NUM_RAYS (WIN_H / WALL_STRIP_WIDTH)
 
-# define scale 0.1254
-// # define scale 1
+# define SCALE 0.1254
+// # define SCALE 1
 
-typedef struct	s_img
+# include "parsing/parsing.h"
+
+typedef struct s_img
 {
 	void	*img_ptr;
 	char	*data;
@@ -47,23 +67,22 @@ typedef struct	s_img
 }				t_img;
 
 typedef struct s_ray{
-	float	rayAngle;
-	float	wallHitX;
-	float	wallHitY;
+	float	ray_angle;
+	float	wall_hit_x;
+	float	wall_hit_y;
 	float	distance;
-	int		wasHitVertical;
-	int		isRayFacingDown;
-	int		isRayFacingUp;
-	int		isRayFacingRight;
-	int		isRayFacingLeft;
-	float	horzWallHitX;
-	float	horzWallHitY;
-	float	vertWallHitX;
-	float	vertWallHitY;
+	int		was_hit_vertical;
+	int		is_ray_facing_down;
+	int		is_ray_facing_up;
+	int		is_ray_facing_right;
+	int		is_ray_facing_left;
+	float	horz_wall_hit_x;
+	float	horz_wall_hit_y;
+	float	vert_wall_hit_x;
+	float	vert_wall_hit_y;
 }				t_ray;
 
-
-typedef struct	s_map
+typedef struct s_map
 {
 	char			**map;
 	int				width;
@@ -77,14 +96,20 @@ typedef struct s_player
 	double	x;
 	double	y;
 	double	radius;
-	double	turnDirection;
-	double	walkDirection; 
-	double	rotationAngle;
-	double	moveSpeed;
-	double	rotationSpeed;
+	double	turn_direction;
+	double	walk_direction;
+	double	rotation_angle;
+	double	move_speed;
+	double	rotation_speed;
 }				t_player;
 
-typedef struct	s_mlx
+typedef struct s_mouse
+{
+	int	x;
+	int	y;
+}				t_mouse;
+
+typedef struct s_mlx
 {
 	void		*mlx_ptr;
 	void		*win;
@@ -92,12 +117,18 @@ typedef struct	s_mlx
 	t_player	*plyr;
 	t_ray		**ray;
 	t_map		*mp;
+	t_mouse		*ms;
 }				t_mlx;
+
+//		INIT
+void	init_data(t_mlx *mlx);
+t_game	get_map(t_mlx *mlx, char **argv);
 
 //		KEY HOOK
 int		key_press(int keyCode, t_mlx *mlx);
 int		key_release(int keyCode, t_mlx *mlx);
 int		escp_handler(int keyCode, t_mlx *mlx);
+int		mouse_move(int x, int y, t_mlx *mlx);
 
 //		PLAYER
 int		is_valid_playerIdent(t_mlx *mlx, int index);
@@ -106,25 +137,23 @@ void	update_player(t_mlx *mlx);
 
 //		2D MAP
 void	draw_map(t_mlx *mlx);
-void	castAllRays(t_mlx *mlx);
-void	cast2DRays(t_mlx *mlx);
+void	cast_all_rays(t_mlx *mlx);
+void	cast_2d_rays(t_mlx *mlx);
+void	cast(t_mlx *mlx, int index);
 
 //		3D
-void	render3DProjectedWalls(t_ray** rays, t_mlx *mlx);
+void	render_3d_projected_walls(t_ray **rays, t_mlx *mlx);
 
 //		UTILS
 void	update_window(t_mlx *mlx);
 void	put_pixel(t_mlx *mlx, int x, int y, unsigned int color);
 void	mlx_rectangle(t_mlx *mlx, int x, int y, int width, int height, int r, int g, int b);
-int		hasWallAt(t_mlx *mlx, double x, double y);
-unsigned int	createRGB(unsigned char r, unsigned char g, unsigned b);
+int		has_wall_at(t_mlx *mlx, double x, double y);
+float	distance_between_points(float x1, float y1, float x2, float y2);
 
-//		PARSING	
-// char	*get_next_line(int fd, int *x);
-// int		ft_strlen(const char *s);
-// size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
-// char	*ft_strchr(const char *s, int c);
-// char	*ft_strjoin(char *s1, char *s2);
-// int		get_map(const char *file_name, t_mlx *mlx);
+//		PLAYER
+int		is_valid_player_id(t_mlx *mlx, int index);
+void	player_position(t_mlx *mlx);
+void	init_player(t_mlx *mlx);
 
 #endif
