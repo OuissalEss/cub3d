@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 08:01:13 by oessamdi          #+#    #+#             */
-/*   Updated: 2023/02/08 12:27:22 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/02/09 04:24:19 by oessamdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ int	has_wall_at(t_mlx *mlx, double x, double y)
 	if (map_x < 0 || map_x >= mlx->mp->width
 		|| map_y < 0 || map_y >= mlx->mp->height)
 		return (1);
-	return (mlx->mp->map[map_y][map_x] == '1');
-}
+	if (mlx->mp->map[map_y][map_x] == '1' || mlx->mp->map[map_y][map_x] == '\n')
+		return (1);
+	return (0);
+} 
 
 // Insert pixel into the img buffer
 void	put_pixel(t_mlx *mlx, int x, int y, unsigned int color)
@@ -70,8 +72,5 @@ void	update_window(t_mlx *mlx)
 	update_player(mlx);
 	cast_all_rays(mlx);
 	render_3d_projected_walls(mlx->ray, mlx);
-	draw_map(mlx);
-	draw_player(mlx);
-	cast_2d_rays(mlx);
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win, mlx->img->img_ptr, 0, 0);
 }

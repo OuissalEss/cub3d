@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 08:31:02 by oessamdi          #+#    #+#             */
-/*   Updated: 2023/02/06 07:01:02 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/02/09 02:52:01 by oessamdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	update_line(t_mlx *mlx, int x)
 	}
 	while (i < mlx->mp->width)
 	{
-		new[i] = ' ';
+		new[i] = '\n';
 		i++;
 	}
 	new[i - 1] = '\n';
@@ -98,10 +98,8 @@ t_game	get_map(t_mlx *mlx, char **argv)
 
 void	init_data(t_mlx *mlx)
 {
-	void	*image;
 	int		i;
 
-	i = 0;
 	mlx->plyr = malloc(sizeof(t_player));
 	mlx->img = malloc(sizeof(t_img));
 	mlx->mlx_ptr = mlx_init();
@@ -113,6 +111,7 @@ void	init_data(t_mlx *mlx)
 	mlx->ms = malloc(sizeof(t_mouse));
 	mlx->ms->x = 500;
 	mlx->ray = (t_ray **)malloc(sizeof(t_ray) * NUM_RAYS);
+	i = 0;
 	while (i < NUM_RAYS)
-		mlx->ray[i++] = NULL;
+		mlx->ray[i++] = malloc(sizeof(t_ray));
 }

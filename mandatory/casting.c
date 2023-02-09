@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   casting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 09:31:43 by oessamdi          #+#    #+#             */
-/*   Updated: 2023/02/07 20:41:44 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/02/09 02:49:21 by oessamdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int	found_horz_wall(t_mlx *mlx, int index)
 	if ((mlx->ray[index]->is_ray_facing_left && xstep > 0)
 		|| (mlx->ray[index]->is_ray_facing_right && xstep < 0))
 		xstep *= -1;
-	while (xintercept >= 0 && xintercept <= WIN_W
-		&& yintercept >= 0 && yintercept <= WIN_H)
+	while (xintercept >= 0 && xintercept <= (mlx->mp->width * TAIL)
+		&& yintercept >= 0 && yintercept <= (mlx->mp->height * TAIL))
 	{
 		if (has_wall_at(mlx, xintercept, yintercept - facing_up(mlx, index)))
 		{
@@ -85,16 +85,12 @@ int	found_vert_wall(t_mlx *mlx, int index)
 	ystep = TAIL * tan(mlx->ray[index]->ray_angle);
 	if (mlx->ray[index]->is_ray_facing_up && ystep > 0)
 		ystep *= -1;
-	// else
-	// 	ystep *= 1;
 	if (mlx->ray[index]->is_ray_facing_down && ystep < 0)
 		ystep *= -1;
-	// else
-	// 	ystep *= 1;
 	next_vert_touch_x = xintercept;
 	next_vert_touch_y = yintercept;
-	while (next_vert_touch_x >= 0 && next_vert_touch_x <= WIN_W
-		&& next_vert_touch_y >= 0 && next_vert_touch_y <= WIN_H)
+	while (next_vert_touch_x >= 0 && next_vert_touch_x <= (mlx->mp->width * TAIL)
+		&& next_vert_touch_y >= 0 && next_vert_touch_y <= (mlx->mp->height * TAIL))
 	{
 		if (has_wall_at(mlx, next_vert_touch_x - facing_left(mlx, index),
 				next_vert_touch_y))

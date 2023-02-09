@@ -1,9 +1,9 @@
-NO ./xpm/butterfly.xpm
-SO ./xpm/heart.xpm
-WE ./xpm/love.xpm
-EA ./xpm/paws.xpm
+NO ./mandatory/xpm/butterfly.xpm
+SO ./mandatory/xpm/heart.xpm
+WE ./mandatory/xpm/love.xpm
+EA ./mandatory/xpm/paws.xpm
 
-F 160,160,160
+F 100,100,100
 C 224,224,224
 
            1111111111111111111111111

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 08:01:17 by oessamdi          #+#    #+#             */
-/*   Updated: 2023/02/09 02:01:43 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/02/09 04:25:02 by oessamdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,30 +38,24 @@
 # define RIGHT_ARROW 124
 # define LEFT_ARROW 123
 
+# define W_KEY 13
+# define S_KEY 1
+# define A_KEY 0
+# define D_KEY 2
+
+# define ESC 53
+
 # define TAIL 64
-# define MAPWIDTH 24
-# define MAPHEIGHT 24
-
-// # define WIN_H (mapHeight * TAIL)
-// # define WIN_W (mapWidth * TAIL)
-
 # define WIN_H 1000
 # define WIN_W 1000
 
-# define FOV_ANGLE (60 * (PI / 180))
+# define FOV_ANGLE 1.0471975512
 # define WALL_STRIP_WIDTH 1
-# define NUM_RAYS (WIN_H / WALL_STRIP_WIDTH)
+# define NUM_RAYS WIN_H
 
-# define SCALE 0.1254
-// # define SCALE 1
+# define SCALE 0.05
 
 # include "parsing/parsing.h"
-// # include "textures.h"
-
-// typedef struct s_send{
-// 	int	wall_height;
-// 	int	top_wall;
-// }	t_send;
 
 typedef struct s_img
 {
@@ -137,9 +131,6 @@ typedef struct s_mlx
 	t_map		*mp;
 	t_mouse		*ms;
 	t_game		*game;
-	t_ray		*ray_cast;
-	int			ray_count;
-	// t_send		*send;
 }				t_mlx;
 
 //		INIT
@@ -153,14 +144,12 @@ int		escp_handler(int keyCode, t_mlx *mlx);
 int		mouse_move(int x, int y, t_mlx *mlx);
 
 //		PLAYER
-int		is_valid_playerIdent(t_mlx *mlx, int index);
 void	draw_player(t_mlx *mlx);
 void	update_player(t_mlx *mlx);
 
 //		2D MAP
 void	draw_map(t_mlx *mlx);
 void	cast_all_rays(t_mlx *mlx);
-void	cast_2d_rays(t_mlx *mlx);
 void	cast(t_mlx *mlx, int index);
 
 //		3D
@@ -173,6 +162,7 @@ void	mlx_rectangle(t_mlx *mlx, int x, int y, int width,
 			int height, int r, int g, int b);
 int		has_wall_at(t_mlx *mlx, double x, double y);
 float	distance_between_points(float x1, float y1, float x2, float y2);
+unsigned int	create_rgb(unsigned char r, unsigned char g, unsigned char b);
 
 //		PLAYER
 int		is_valid_player_id(t_mlx *mlx, int index);

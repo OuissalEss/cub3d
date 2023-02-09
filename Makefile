@@ -3,25 +3,36 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+         #
+#    By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/14 08:18:27 by oessamdi          #+#    #+#              #
-#    Updated: 2023/02/09 00:40:09 by slaajour         ###   ########.fr        #
+#    Updated: 2023/02/09 04:29:48 by oessamdi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3d
+NAME = cub3D
+NAME_B = cub3D_bonus
 
-SRC = 	cub3d.c cub3d_utils.c player.c init_data.c render_3d.c casting.c \
+SRC_B =	bonus/cub3d.c bonus/cub3d_utils.c bonus/player.c bonus/init_data.c bonus/render_3d.c bonus/casting.c \
 		\
-		keys_handlers.c rays.c \
+		bonus/keys_handlers.c bonus/rays.c bonus/doors.c \
 		\
-		parsing/cub3d_utils0.c parsing/cub3d_utils1.c parsing/get_next_line.c \
-		parsing/get_next_line_utils.c parsing/allocation.c parsing/directions.c \
-		parsing/1stpart.c parsing/2ndpart.c parsing/map_utils.c parsing/error_msgs.c \
-		parsing/plus_minus.c textures.c get_textures.c
+		bonus/parsing/cub3d_utils0.c bonus/parsing/cub3d_utils1.c bonus/parsing/get_next_line.c \
+		bonus/parsing/get_next_line_utils.c bonus/parsing/allocation.c bonus/parsing/directions.c \
+		bonus/parsing/1stpart.c bonus/parsing/2ndpart.c bonus/parsing/map_utils.c bonus/parsing/error_msgs.c \
+		bonus/parsing/plus_minus.c bonus/textures.c bonus/get_textures.c
 
-CC = @gcc $(SRC) -lmlx -framework OpenGL -framework AppKit
+SRC_M = mandatory/cub3d.c mandatory/cub3d_utils.c mandatory/player.c mandatory/init_data.c mandatory/render_3d.c mandatory/casting.c \
+		\
+		mandatory/keys_handlers.c mandatory/rays.c \
+		\
+		mandatory/parsing/cub3d_utils0.c mandatory/parsing/cub3d_utils1.c mandatory/parsing/get_next_line.c \
+		mandatory/parsing/get_next_line_utils.c mandatory/parsing/allocation.c mandatory/parsing/directions.c \
+		mandatory/parsing/1stpart.c mandatory/parsing/2ndpart.c mandatory/parsing/map_utils.c mandatory/parsing/error_msgs.c \
+		mandatory/parsing/plus_minus.c mandatory/textures.c mandatory/get_textures.c
+
+CC = @gcc $(SRC_M) -lmlx -framework OpenGL -framework AppKit
+CC_S = @gcc $(SRC_B) -lmlx -framework OpenGL -framework AppKit
 
 MLX_PATH = mlx
 
@@ -36,9 +47,15 @@ RM = @rm -f
 all : $(NAME)
 
 $(NAME) :
-			$(CC) -o $(NAME) $(DEBUG)
+			$(CC) -o $(NAME)
+
+
+bonus : $(NAME_B)
+
+$(NAME_B) :
+			$(CC_S) -o $(NAME_B)
 	
 fclean :
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(NAME_B)
 
 re : fclean all

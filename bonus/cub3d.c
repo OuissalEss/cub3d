@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 08:05:17 by oessamdi          #+#    #+#             */
-/*   Updated: 2023/02/07 22:27:56 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/02/09 04:19:54 by oessamdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,9 @@ void	draw_map(t_mlx *mlx)
 			if (mlx->mp->map[h][w] == '1')
 				mlx_rectangle(mlx, x, y, SCALE * TAIL, SCALE * TAIL,
 					255, 255, 255);
-			if (mlx->mp->map[h][w] != '1' && mlx->mp->map[h][w] != ' '
-				&& mlx->mp->map[h][w] != '\n')
+			else if (mlx->mp->map[h][w] == 'D')
+				mlx_rectangle(mlx, x, y, SCALE * TAIL, SCALE * TAIL, 0, 250, 0);
+			else if (mlx->mp->map[h][w] != ' ' && mlx->mp->map[h][w] != '\n')
 				mlx_rectangle(mlx, x, y, SCALE * TAIL, SCALE * TAIL, 0, 0, 0);
 			w++;
 		}
@@ -112,7 +113,6 @@ int	main(int argc, char **argv)
 	game = get_map(mlx, argv);
 	get_textures(mlx, &game);
 	init_player(mlx);
-	// system("leaks cub3D");
 	loop(mlx);
 	return (0);
 }
