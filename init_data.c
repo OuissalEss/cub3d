@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 08:31:02 by oessamdi          #+#    #+#             */
-/*   Updated: 2023/02/05 08:34:18 by oessamdi         ###   ########.fr       */
+/*   Updated: 2023/02/06 07:01:02 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "textures.h"
 
 void	get_height_width(t_mlx *mlx)
 {
@@ -97,7 +98,8 @@ t_game	get_map(t_mlx *mlx, char **argv)
 
 void	init_data(t_mlx *mlx)
 {
-	int	i;
+	void	*image;
+	int		i;
 
 	i = 0;
 	mlx->plyr = malloc(sizeof(t_player));

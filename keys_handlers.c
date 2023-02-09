@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys_handlers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 08:00:55 by oessamdi          #+#    #+#             */
-/*   Updated: 2023/02/05 09:10:16 by oessamdi         ###   ########.fr       */
+/*   Updated: 2023/02/09 01:40:38 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,22 @@ int	key_release(int keyCode, t_mlx *mlx)
 
 int	mouse_move(int x, int y, t_mlx *mlx)
 {
-	if (mlx->ms->x < x)
-	{
-		key_press(RIGHT_ARROW, mlx);
-		key_release(RIGHT_ARROW, mlx);
-	}
-	else if (mlx->ms->x > x)
-	{
-		key_press(LEFT_ARROW, mlx);
-		key_release(LEFT_ARROW, mlx);
-	}
-	mlx->ms->x = x;
-	if (x < 0 || x > WIN_W || y < 0 || y > WIN_H)
-	{
-		// mlx_mouse_move(mlx->win, WIN_W / 2, WIN_H / 2);
-		mlx->ms->x = 500;
-	}
+	// if (mlx->ms->x < x)
+	// {
+	// 	key_press(RIGHT_ARROW, mlx);
+	// 	key_release(RIGHT_ARROW, mlx);
+	// }
+	// else if (mlx->ms->x > x)
+	// {
+	// 	key_press(LEFT_ARROW, mlx);
+	// 	key_release(LEFT_ARROW, mlx);
+	// }
+	// mlx->ms->x = x;
+	// if (x < 0 || x > WIN_W || y < 0 || y > WIN_H)
+	// {
+	// 	// mlx_mouse_move(mlx->win, WIN_W / 2, WIN_H / 2);
+	// 	mlx->ms->x = 500;
+	// }
 	return (0);
 }
 

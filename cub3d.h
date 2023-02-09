@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 08:01:17 by oessamdi          #+#    #+#             */
-/*   Updated: 2023/02/05 09:36:58 by oessamdi         ###   ########.fr       */
+/*   Updated: 2023/02/09 02:01:43 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # define RIGHT_ARROW 124
 # define LEFT_ARROW 123
 
-# define TAIL 32
+# define TAIL 64
 # define MAPWIDTH 24
 # define MAPHEIGHT 24
 
@@ -56,14 +56,23 @@
 // # define SCALE 1
 
 # include "parsing/parsing.h"
+// # include "textures.h"
+
+// typedef struct s_send{
+// 	int	wall_height;
+// 	int	top_wall;
+// }	t_send;
 
 typedef struct s_img
 {
+	char	*path;
 	void	*img_ptr;
 	char	*data;
 	int		size_l;
 	int		bpp;
 	int		endian;
+	int		width;
+	int		height;
 }				t_img;
 
 typedef struct s_ray{
@@ -71,6 +80,8 @@ typedef struct s_ray{
 	float	wall_hit_x;
 	float	wall_hit_y;
 	float	distance;
+	int		offset_x;
+	int		offset_y;
 	int		was_hit_vertical;
 	int		is_ray_facing_down;
 	int		is_ray_facing_up;
@@ -80,6 +91,9 @@ typedef struct s_ray{
 	float	horz_wall_hit_y;
 	float	vert_wall_hit_x;
 	float	vert_wall_hit_y;
+	int		wall_height;
+	int		top_wall;
+	int		bottom_wall;
 }				t_ray;
 
 typedef struct s_map
@@ -89,6 +103,10 @@ typedef struct s_map
 	int				height;
 	unsigned int	rgb_f;
 	unsigned int	rgb_c;
+	t_img			*no;
+	t_img			*so;
+	t_img			*we;
+	t_img			*ea;
 }				t_map;
 
 typedef struct s_player
@@ -118,6 +136,10 @@ typedef struct s_mlx
 	t_ray		**ray;
 	t_map		*mp;
 	t_mouse		*ms;
+	t_game		*game;
+	t_ray		*ray_cast;
+	int			ray_count;
+	// t_send		*send;
 }				t_mlx;
 
 //		INIT
@@ -147,7 +169,8 @@ void	render_3d_projected_walls(t_ray **rays, t_mlx *mlx);
 //		UTILS
 void	update_window(t_mlx *mlx);
 void	put_pixel(t_mlx *mlx, int x, int y, unsigned int color);
-void	mlx_rectangle(t_mlx *mlx, int x, int y, int width, int height, int r, int g, int b);
+void	mlx_rectangle(t_mlx *mlx, int x, int y, int width,
+			int height, int r, int g, int b);
 int		has_wall_at(t_mlx *mlx, double x, double y);
 float	distance_between_points(float x1, float y1, float x2, float y2);
 

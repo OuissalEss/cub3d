@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 07:56:08 by oessamdi          #+#    #+#             */
-/*   Updated: 2023/02/05 09:34:21 by oessamdi         ###   ########.fr       */
+/*   Updated: 2023/02/07 22:10:21 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,16 @@ void	cast_2d_rays(t_mlx *mlx)
 	float	ray_angle;
 
 	column_id = 0;
+	i = 0;
 	ray_angle = mlx->plyr->rotation_angle - (FOV_ANGLE / 2);
+	mlx->ray_count = 0;
 	while (i < NUM_RAYS)
 	{
 		ray_angle = normalize_angle(ray_angle);
 		ray_angle += (FOV_ANGLE / NUM_RAYS);
 		column_id++;
 		i++;
+		mlx->ray_count++;
 	}
 }
 

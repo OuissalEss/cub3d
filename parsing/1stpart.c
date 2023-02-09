@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   1stpart.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 21:51:05 by slaajour          #+#    #+#             */
-/*   Updated: 2023/02/04 03:14:42 by oessamdi         ###   ########.fr       */
+/*   Updated: 2023/02/06 07:04:53 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,17 @@ void	north_check(t_game *game, int i, int j)
 		k = 0;
 		while (j <= ft_strlen(game->splitted[i]))
 			game->new[k++] = game->splitted[i][j++];
+		game->no = game->new;
 		if (access(game->new, F_OK) == -1)
 		{
-			printf("Error\nThe file xpm doesn't really exist :)!\n");
+			printf("Error!\nThe file xpm doesn't really exist :)\n");
 			exit(EXIT_FAILURE);
 		}
 		game->flag_no++;
 	}
 	else
 	{
-		printf("Error\n(NO) here is written more than once :)!\n");
+		printf("Error!\n(NO) here is written more than once :)\n");
 		exit(EXIT_FAILURE);
 	}
 }
@@ -85,7 +86,6 @@ void	directions(t_game *game, int i, int j)
 		printf("Error!\nThere is an error in RGB colors or textures or map :)\n");
 		exit(EXIT_FAILURE);
 	}
-	free(game->new);
 }
 
 void	check_map_data(t_game *game)

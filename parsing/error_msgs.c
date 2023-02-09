@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_msgs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 05:03:19 by slaajour          #+#    #+#             */
-/*   Updated: 2023/02/04 03:15:10 by oessamdi         ###   ########.fr       */
+/*   Updated: 2023/02/06 12:27:50 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,18 @@ void	error_newline(void)
 
 void	error_colors(void)
 {
-	printf("Error\nSomething is wrong in colors :)!\n");
+	printf("Error!\nSomething is wrong in colors :)\n");
 	exit(EXIT_FAILURE);
 }
 
 void	error_position(void)
 {
-	printf("Error\nWrong position for a character :)!\n");
+	printf("Error!\nWrong position for a character :)\n");
+	exit(EXIT_FAILURE);
+}
+
+void	error_path(void)
+{
+	printf("Error!\nInvalid texture path :)\n");
 	exit(EXIT_FAILURE);
 }

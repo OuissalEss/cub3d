@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 08:05:17 by oessamdi          #+#    #+#             */
-/*   Updated: 2023/02/05 09:23:23 by oessamdi         ###   ########.fr       */
+/*   Updated: 2023/02/07 22:27:56 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "parsing/parsing.h"
+#include "textures.h"
 
 // Draw the 2D player
 void	draw_player(t_mlx *mlx)
@@ -109,7 +110,9 @@ int	main(int argc, char **argv)
 	mlx = malloc(sizeof(t_mlx));
 	init_data(mlx);
 	game = get_map(mlx, argv);
+	get_textures(mlx, &game);
 	init_player(mlx);
+	// system("leaks cub3D");
 	loop(mlx);
 	return (0);
 }

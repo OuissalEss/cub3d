@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 17:14:36 by slaajour          #+#    #+#             */
-/*   Updated: 2023/02/04 02:46:36 by oessamdi         ###   ########.fr       */
+/*   Updated: 2023/02/06 05:18:25 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <mlx.h>
 # include <fcntl.h>
 # include <string.h>
-# include "get_next_line/get_next_line.h"
+# include "get_next_line.h"
 
 		/* ONE LOVELY CUTE LONG STRUCT */
 
@@ -32,6 +32,10 @@ typedef struct s_game{
 	char			**ceiling;
 	char			*new;
 	char			*string;
+	char			*no;
+	char			*so;
+	char			*ea;
+	char			*we;
 	int				len;
 	int				len_map_data;
 	int				len_map_values;

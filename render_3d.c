@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   render_3d.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 09:33:36 by oessamdi          #+#    #+#             */
-/*   Updated: 2023/02/05 09:36:06 by oessamdi         ###   ########.fr       */
+/*   Updated: 2023/02/09 02:14:13 by slaajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "textures.h"
 
 unsigned int	create_rgb(unsigned char r, unsigned char g, unsigned char b)
 {
@@ -38,33 +39,35 @@ void	mlx_rectangle(t_mlx *mlx, int x, int y, int width, int height, int r, int g
 
 void	render_3d_projected_walls(t_ray **rays, t_mlx *mlx)
 {
-	int		i;
 	int		x;
 	int		y;
 	t_ray	*ray;
 	float	wall_strip_height;
 
-	i = 0;
-	while (i < NUM_RAYS)
+	x = 0;
+	while (x < NUM_RAYS)
 	{
-		ray = rays[i];
+		ray = rays[x];
 		wall_strip_height = (TAIL / (ray->distance * cos(ray->ray_angle - mlx->plyr->rotation_angle))) * ((WIN_W / 2) / tan(FOV_ANGLE / 2));
-		x = i * WALL_STRIP_WIDTH;
-		y = (WIN_H / 2) - (wall_strip_height / 2);
+		y = ((WIN_H / 2) - wall_strip_height / 2);
+		ray->wall_height = wall_strip_height;
+		if (y < 0)
+		 	y = 0;
+		ray->top_wall = y;
+		ray->bottom_wall = (WIN_H / 2) + (wall_strip_height / 2);
+		if (ray->bottom_wall > 1000)
+		  	ray->bottom_wall = 1000;
 		if (ray->was_hit_vertical)
 		{
-			if (ray->ray_angle > (PI / 2) && ray->ray_angle < (3 * PI / 2))
-				mlx_rectangle(mlx, x, y, WALL_STRIP_WIDTH, (int)wall_strip_height, 0, 0, 255);
-			else
-				mlx_rectangle(mlx, x, y, WALL_STRIP_WIDTH, (int)wall_strip_height, 0, 255, 255);
+			ray->offset_x = (int)ray->wall_hit_y % TAIL;
+			calcul(mlx, ray, x);
 		}
 		else
 		{
-			if (ray->ray_angle > 0 && ray->ray_angle < PI)
-				mlx_rectangle(mlx, x, y, WALL_STRIP_WIDTH, (int)wall_strip_height, 153, 0, 153);
-			else
-				mlx_rectangle(mlx, x, y, WALL_STRIP_WIDTH, (int)wall_strip_height, 255, 0, 255);
+			ray->offset_x = (int)ray->wall_hit_x % TAIL;
+			calcul(mlx, ray, x);
 		}
-		i++;
+		x++;
+		
 	}
 }
