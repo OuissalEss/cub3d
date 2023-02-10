@@ -6,106 +6,88 @@
 /*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 09:31:43 by oessamdi          #+#    #+#             */
-/*   Updated: 2023/02/09 02:49:21 by oessamdi         ###   ########.fr       */
+/*   Updated: 2023/02/10 02:09:02 by oessamdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	facing_up(t_mlx *mlx, int index)
-{
-	if (mlx->ray[index]->is_ray_facing_up)
-		return (1);
-	return (0);
-}
-
 // Horizontal Ray-Grid Intersection Code
 int	found_horz_wall(t_mlx *mlx, int index)
 {
-	float	xintercept;
-	float	yintercept;
+	float	xinter;
+	float	yinter;
 	float	xstep;
 	float	ystep;
 
-	yintercept = (int)(mlx->plyr->y / TAIL) * TAIL;
-	if (mlx->ray[index]->is_ray_facing_down)
-		yintercept += TAIL;
-	xintercept = mlx->plyr->x + (yintercept - mlx->plyr->y)
-		/ tan(mlx->ray[index]->ray_angle);
-	ystep = TAIL;
-	if (mlx->ray[index]->is_ray_facing_up)
-		ystep *= -1;
-	xstep = TAIL / tan(mlx->ray[index]->ray_angle);
-	if ((mlx->ray[index]->is_ray_facing_left && xstep > 0)
-		|| (mlx->ray[index]->is_ray_facing_right && xstep < 0))
-		xstep *= -1;
-	while (xintercept >= 0 && xintercept <= (mlx->mp->width * TAIL)
-		&& yintercept >= 0 && yintercept <= (mlx->mp->height * TAIL))
+	yinter = get_yinterh(mlx, index);
+	xinter = get_xinterh(mlx, index, yinter);
+	ystep = get_ysteph(mlx, index);
+	xstep = get_xsteph(mlx, index);
+	while (xinter >= 0 && xinter <= (mlx->mp->width * TAIL)
+		&& yinter >= 0 && yinter <= (mlx->mp->height * TAIL))
 	{
-		if (has_wall_at(mlx, xintercept, yintercept - facing_up(mlx, index)))
+		if (has_wall_at(mlx, xinter, yinter - facing_up(mlx, index)))
 		{
-			mlx->ray[index]->horz_wall_hit_x = xintercept;
-			mlx->ray[index]->horz_wall_hit_y = yintercept;
+			mlx->ray[index]->horz_wall_hit_x = xinter;
+			mlx->ray[index]->horz_wall_hit_y = yinter;
 			return (1);
 		}
 		else
 		{
-			xintercept += xstep;
-			yintercept += ystep;
+			xinter += xstep;
+			yinter += ystep;
 		}
 	}
-	return (0);
-}
-
-int	facing_left(t_mlx *mlx, int index)
-{
-	if (mlx->ray[index]->is_ray_facing_left)
-		return (1);
 	return (0);
 }
 
 // Vertical Ray-Grid Intersection Code
 int	found_vert_wall(t_mlx *mlx, int index)
 {
-	float	next_vert_touch_x;
-	float	next_vert_touch_y;
-	float	xintercept;
-	float	yintercept;
+	float	xinter;
+	float	yinter;
 	float	xstep;
 	float	ystep;
 
-	xintercept = (int)(mlx->plyr->x / TAIL) * TAIL;
-	if (mlx->ray[index]->is_ray_facing_right)
-		xintercept += TAIL;
-	yintercept = mlx->plyr->y + (xintercept - mlx->plyr->x)
-		* tan(mlx->ray[index]->ray_angle);
-	xstep = TAIL;
-	if (mlx->ray[index]->is_ray_facing_left)
-		xstep *= -1;
-	ystep = TAIL * tan(mlx->ray[index]->ray_angle);
-	if (mlx->ray[index]->is_ray_facing_up && ystep > 0)
-		ystep *= -1;
-	if (mlx->ray[index]->is_ray_facing_down && ystep < 0)
-		ystep *= -1;
-	next_vert_touch_x = xintercept;
-	next_vert_touch_y = yintercept;
-	while (next_vert_touch_x >= 0 && next_vert_touch_x <= (mlx->mp->width * TAIL)
-		&& next_vert_touch_y >= 0 && next_vert_touch_y <= (mlx->mp->height * TAIL))
+	xinter = get_xinterv(mlx, index);
+	yinter = get_yinterv(mlx, index, xinter);
+	xstep = get_xstepv(mlx, index);
+	ystep = get_ystepv(mlx, index);
+	while (xinter >= 0 && xinter <= (mlx->mp->width * TAIL)
+		&& yinter >= 0 && yinter <= (mlx->mp->height * TAIL))
 	{
-		if (has_wall_at(mlx, next_vert_touch_x - facing_left(mlx, index),
-				next_vert_touch_y))
+		if (has_wall_at(mlx, xinter - facing_left(mlx, index), yinter))
 		{
-			mlx->ray[index]->vert_wall_hit_x = next_vert_touch_x;
-			mlx->ray[index]->vert_wall_hit_y = next_vert_touch_y;
+			mlx->ray[index]->vert_wall_hit_x = xinter;
+			mlx->ray[index]->vert_wall_hit_y = yinter;
 			return (1);
 		}
 		else
 		{
-			next_vert_touch_x += xstep;
-			next_vert_touch_y += ystep;
+			xinter += xstep;
+			yinter += ystep;
 		}
 	}
 	return (0);
+}
+
+void	get_distance(t_mlx *mlx, int index, float distance, int x)
+{
+	if (x == 0)
+	{
+		mlx->ray[index]->wall_hit_x = mlx->ray[index]->horz_wall_hit_x;
+		mlx->ray[index]->wall_hit_y = mlx->ray[index]->horz_wall_hit_y;
+		mlx->ray[index]->distance = distance;
+		mlx->ray[index]->was_hit_vertical = 0;
+	}
+	else
+	{
+		mlx->ray[index]->wall_hit_x = mlx->ray[index]->vert_wall_hit_x;
+		mlx->ray[index]->wall_hit_y = mlx->ray[index]->vert_wall_hit_y;
+		mlx->ray[index]->distance = distance;
+		mlx->ray[index]->was_hit_vertical = 1;
+	}
 }
 
 void	cast(t_mlx *mlx, int index)
@@ -124,17 +106,7 @@ void	cast(t_mlx *mlx, int index)
 				mlx->ray[index]->vert_wall_hit_x,
 				mlx->ray[index]->vert_wall_hit_y);
 	if (horz_hit_distance < vert_hit_distance)
-	{
-		mlx->ray[index]->wall_hit_x = mlx->ray[index]->horz_wall_hit_x;
-		mlx->ray[index]->wall_hit_y = mlx->ray[index]->horz_wall_hit_y;
-		mlx->ray[index]->distance = horz_hit_distance;
-		mlx->ray[index]->was_hit_vertical = 0;
-	}
+		get_distance(mlx, index, horz_hit_distance, 0);
 	else
-	{
-		mlx->ray[index]->wall_hit_x = mlx->ray[index]->vert_wall_hit_x;
-		mlx->ray[index]->wall_hit_y = mlx->ray[index]->vert_wall_hit_y;
-		mlx->ray[index]->distance = vert_hit_distance;
-		mlx->ray[index]->was_hit_vertical = 1;
-	}
+		get_distance(mlx, index, vert_hit_distance, 1);
 }

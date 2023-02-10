@@ -6,11 +6,36 @@
 /*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 08:18:32 by oessamdi          #+#    #+#             */
-/*   Updated: 2023/02/05 08:52:12 by oessamdi         ###   ########.fr       */
+/*   Updated: 2023/02/10 05:23:54 by oessamdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+// Update the player data on each key press
+void	update_player(t_mlx *mlx)
+{
+	int	move_step;
+	int	plyr_x;
+	int	plyr_y;
+
+	mlx->plyr->rotation_angle += mlx->plyr->turn_direction
+		* mlx->plyr->rotation_speed;
+	move_step = mlx->plyr->walk_direction * mlx->plyr->move_speed;
+	plyr_x = mlx->plyr->x + cos(mlx->plyr->rotation_angle) * move_step;
+	plyr_y = mlx->plyr->y + sin(mlx->plyr->rotation_angle) * move_step;
+	if (mlx->plyr->walk_rotation != 0)
+	{
+		move_step = mlx->plyr->move_speed * mlx->plyr->walk_rotation;
+		plyr_y = mlx->plyr->y - cos(mlx->plyr->rotation_angle) * move_step;
+		plyr_x = mlx->plyr->x + sin(mlx->plyr->rotation_angle) * move_step;
+	}
+	if (!has_wall_at(mlx, plyr_x + 5, plyr_y) && !has_wall_at(mlx, plyr_x - 5, plyr_y) && !has_wall_at(mlx, plyr_x, plyr_y + 5) && !has_wall_at(mlx, plyr_x, plyr_y - 5))
+	{
+		mlx->plyr->x = plyr_x;
+		mlx->plyr->y = plyr_y;
+	}
+}
 
 int	is_valid_player_id(t_mlx *mlx, int index)
 {
@@ -58,7 +83,7 @@ void	init_player(t_mlx *mlx)
 	mlx->plyr->turn_direction = 0;
 	mlx->plyr->walk_direction = 0;
 	mlx->plyr->rotation_angle = PI / 2;
-	mlx->plyr->move_speed = 10;
+	mlx->plyr->move_speed = 20;
 	mlx->plyr->rotation_speed = 4 * (PI / 180);
 	player_position(mlx);
 }

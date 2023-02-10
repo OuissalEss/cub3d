@@ -6,7 +6,7 @@
 #    By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/14 08:18:27 by oessamdi          #+#    #+#              #
-#    Updated: 2023/02/09 04:29:48 by oessamdi         ###   ########.fr        #
+#    Updated: 2023/02/10 05:41:32 by oessamdi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRC_B =	bonus/cub3d.c bonus/cub3d_utils.c bonus/player.c bonus/init_data.c bonus
 
 SRC_M = mandatory/cub3d.c mandatory/cub3d_utils.c mandatory/player.c mandatory/init_data.c mandatory/render_3d.c mandatory/casting.c \
 		\
-		mandatory/keys_handlers.c mandatory/rays.c \
+		mandatory/keys_handlers.c mandatory/rays.c mandatory/draw_map.c mandatory/casting_horz.c mandatory/casting_vert.c \
 		\
 		mandatory/parsing/cub3d_utils0.c mandatory/parsing/cub3d_utils1.c mandatory/parsing/get_next_line.c \
 		mandatory/parsing/get_next_line_utils.c mandatory/parsing/allocation.c mandatory/parsing/directions.c \
@@ -47,7 +47,7 @@ RM = @rm -f
 all : $(NAME)
 
 $(NAME) :
-			$(CC) -o $(NAME)
+			$(CC) -o $(NAME) $(DEBUG)
 
 
 bonus : $(NAME_B)

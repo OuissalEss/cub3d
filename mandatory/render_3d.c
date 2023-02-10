@@ -6,7 +6,7 @@
 /*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 09:33:36 by oessamdi          #+#    #+#             */
-/*   Updated: 2023/02/09 03:15:43 by oessamdi         ###   ########.fr       */
+/*   Updated: 2023/02/10 06:28:05 by oessamdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,23 @@ unsigned int	create_rgb(unsigned char r, unsigned char g, unsigned char b)
 	return ((r << 16) | (g << 8) | b);
 }
 
-void	mlx_rectangle(t_mlx *mlx, int x, int y, int width, int height, int r, int g, int b)
+void	mlx_rectangle(t_mlx *mlx, int x, int y, int color)
 {
 	int	i;
 	int	j;
+	int	width;
+	int	height;
 
 	i = x;
+	width = TAIL * SCALE;
+	height = TAIL * SCALE;
 	while (i <= x + width)
 	{
 		j = y;
 		while (j <= y + height)
 		{
 			if (i >= 0 && i < WIN_W && j >= 0 && j < WIN_H)
-				put_pixel(mlx, i, j, create_rgb(r, g, b));
+				put_pixel(mlx, i, j, color);
 			j++;
 		}
 		i++;
@@ -48,26 +52,18 @@ void	render_3d_projected_walls(t_ray **rays, t_mlx *mlx)
 	while (x < NUM_RAYS)
 	{
 		ray = rays[x];
-		wall_strip_height = (TAIL / (ray->distance * cos(ray->ray_angle - mlx->plyr->rotation_angle))) * ((WIN_W / 2) / tan(FOV_ANGLE / 2));
+		wall_strip_height = (TAIL / (ray->distance * cos(ray->ray_angle
+						- mlx->plyr->rotation_angle))) * ((WIN_W / 2)
+				/ tan(FOV_ANGLE / 2));
 		y = ((WIN_H / 2) - wall_strip_height / 2);
 		ray->wall_height = wall_strip_height;
 		if (y < 0)
-		 	y = 0;
+			y = 0;
 		ray->top_wall = y;
-		ray->bottom_wall = (WIN_H / 2) + (wall_strip_height / 2);
-		if (ray->bottom_wall > 1000)
-		  	ray->bottom_wall = 1000;
-		if (ray->was_hit_vertical)
-		{
-			ray->offset_x = (int)ray->wall_hit_y % TAIL;
-			calcul(mlx, ray, x);
-		}
-		else
-		{
-			ray->offset_x = (int)ray->wall_hit_x % TAIL;
-			calcul(mlx, ray, x);
-		}
+		ray->bottom_wall = (WIN_H  / 2) + (ray->wall_height / 2);
+		if (ray->bottom_wall > WIN_H)
+			ray->bottom_wall = WIN_H;
+		calcul(mlx, ray, x);
 		x++;
-		
 	}
 }

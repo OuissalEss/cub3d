@@ -6,7 +6,7 @@
 /*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 07:56:08 by oessamdi          #+#    #+#             */
-/*   Updated: 2023/02/09 03:11:29 by oessamdi         ###   ########.fr       */
+/*   Updated: 2023/02/10 05:13:52 by oessamdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 float	normalize_angle(float angle)
 {
-	while (angle < 0)
+	angle = fmod(angle, (2 * M_PI));
+	if (angle < 0)
 		angle += 2 * M_PI;
-	while (angle >= 2 * M_PI)
-		angle -= 2 * M_PI;
 	return (angle);
 }
 

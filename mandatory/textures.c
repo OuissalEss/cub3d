@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slaajour <slaajour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 11:18:49 by slaajour          #+#    #+#             */
-/*   Updated: 2023/02/09 02:06:29 by slaajour         ###   ########.fr       */
+/*   Updated: 2023/02/10 06:28:48 by oessamdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,13 @@ void	calcul(t_mlx *mlx, t_ray *ray, int x)
 {
 	int		i;
 
-	// if (!ray->was_hit_vertical)
-	// 	ray->offset_x = ((int)ray->wall_hit_x) % TAIL;
-	// else
-	// 	ray->offset_x = ((int)ray->wall_hit_y) % TAIL;
+	if (ray->was_hit_vertical)
+		ray->offset_x = (int)ray->wall_hit_y % TAIL;
+	else
+		ray->offset_x = (int)ray->wall_hit_x % TAIL;
 	i = ray->top_wall;
 	while (i < ray->bottom_wall)
 	{
-		// printf("i === %d\n", i);
 		if (ray->was_hit_vertical && ray->is_ray_facing_right)
 			east_add(mlx, ray, i, x);
 		else if (ray->was_hit_vertical && ray->is_ray_facing_left)
@@ -72,5 +71,4 @@ void	calcul(t_mlx *mlx, t_ray *ray, int x)
 			north_add(mlx, ray, i, x);
 		i++;
 	}
-	// printf("here\n");
 }

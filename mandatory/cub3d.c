@@ -6,86 +6,13 @@
 /*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 08:05:17 by oessamdi          #+#    #+#             */
-/*   Updated: 2023/02/09 04:24:52 by oessamdi         ###   ########.fr       */
+/*   Updated: 2023/02/10 02:28:59 by oessamdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "parsing/parsing.h"
 #include "textures.h"
-
-// Draw the 2D player
-void	draw_player(t_mlx *mlx)
-{
-	int	x;
-	int	y;
-	int	r;
-	int	i;
-	int	j;
-
-	x = mlx->plyr->x;
-	y = mlx->plyr->y;
-	r = mlx->plyr->radius;
-	i = -r;
-	while (i <= r)
-	{
-		j = -r;
-		while (j <= r)
-		{
-			if (i * i + j * j <= r * r)
-				put_pixel(mlx, (x + i) * SCALE, (y + j) * SCALE, 0x00FFFF);
-			j++;
-		}
-		i++;
-	}
-}
-
-// Update the player data on each key press
-void	update_player(t_mlx *mlx)
-{
-	int	move_step;
-	int	plyr_x;
-	int	plyr_y;
-
-	mlx->plyr->rotation_angle += mlx->plyr->turn_direction
-		* mlx->plyr->rotation_speed;
-	move_step = mlx->plyr->walk_direction * mlx->plyr->move_speed;
-	plyr_x = mlx->plyr->x + cos(mlx->plyr->rotation_angle) * move_step;
-	plyr_y = mlx->plyr->y + sin(mlx->plyr->rotation_angle) * move_step;
-	if (!has_wall_at(mlx, plyr_x, plyr_y))
-	{
-		mlx->plyr->x = plyr_x;
-		mlx->plyr->y = plyr_y;
-	}
-}
-
-// Draw the 2D game map
-void	draw_map(t_mlx *mlx)
-{
-	int	h;
-	int	w;
-	int	x;
-	int	y;
-
-	h = 0;
-	while (h < mlx->mp->height)
-	{
-		w = 0;
-		while (w < mlx->mp->width)
-		{
-			x = w * TAIL * SCALE;
-			y = h * TAIL * SCALE;
-			if (mlx->mp->map[h][w] == '1')
-				mlx_rectangle(mlx, x, y, SCALE * TAIL, SCALE * TAIL,
-					255, 255, 255);
-			if (mlx->mp->map[h][w] != '1' && mlx->mp->map[h][w] != ' '
-				&& mlx->mp->map[h][w] != '\n')
-				mlx_rectangle(mlx, x, y, SCALE * TAIL, SCALE * TAIL, 0, 0, 0);
-			w++;
-		}
-		h++;
-	}
-}
 
 void	loop(t_mlx *mlx)
 {

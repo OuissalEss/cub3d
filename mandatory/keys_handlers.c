@@ -6,7 +6,7 @@
 /*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 08:00:55 by oessamdi          #+#    #+#             */
-/*   Updated: 2023/02/09 04:24:44 by oessamdi         ###   ########.fr       */
+/*   Updated: 2023/02/10 04:49:25 by oessamdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int	key_press(int keyCode, t_mlx *mlx)
 	else if (keyCode == S_KEY)
 		mlx->plyr->walk_direction = -1;
 	else if (keyCode == A_KEY)
-		mlx->plyr->turn_direction = -1;
+		mlx->plyr->walk_rotation = +1;
 	else if (keyCode == D_KEY)
-		mlx->plyr->turn_direction = +1;
+		mlx->plyr->walk_rotation = -1;
 	else if (keyCode == RIGHT_ARROW)
 		mlx->plyr->turn_direction = +1;
 	else if (keyCode == LEFT_ARROW)
@@ -52,9 +52,9 @@ int	key_release(int keyCode, t_mlx *mlx)
 	else if (keyCode == S_KEY)
 		mlx->plyr->walk_direction = 0;
 	else if (keyCode == A_KEY)
-		mlx->plyr->turn_direction = 0;
+		mlx->plyr->walk_rotation = 0;
 	else if (keyCode == D_KEY)
-		mlx->plyr->turn_direction = 0;
+		mlx->plyr->walk_rotation = 0;
 	else if (keyCode == RIGHT_ARROW)
 		mlx->plyr->turn_direction = 0;
 	else if (keyCode == LEFT_ARROW)

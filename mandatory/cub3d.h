@@ -6,7 +6,7 @@
 /*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 08:01:17 by oessamdi          #+#    #+#             */
-/*   Updated: 2023/02/09 04:25:02 by oessamdi         ###   ########.fr       */
+/*   Updated: 2023/02/10 05:12:18 by oessamdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 
 # define ESC 53
 
-# define TAIL 64
+# define TAIL 150
 # define WIN_H 1000
 # define WIN_W 1000
 
@@ -110,6 +110,7 @@ typedef struct s_player
 	double	radius;
 	double	turn_direction;
 	double	walk_direction;
+	double	walk_rotation;
 	double	rotation_angle;
 	double	move_speed;
 	double	rotation_speed;
@@ -154,19 +155,29 @@ void	cast(t_mlx *mlx, int index);
 
 //		3D
 void	render_3d_projected_walls(t_ray **rays, t_mlx *mlx);
+void	draw_f_c(t_mlx *mlx);
 
 //		UTILS
 void	update_window(t_mlx *mlx);
 void	put_pixel(t_mlx *mlx, int x, int y, unsigned int color);
-void	mlx_rectangle(t_mlx *mlx, int x, int y, int width,
-			int height, int r, int g, int b);
+void	mlx_rectangle(t_mlx *mlx, int x, int y, int color);
 int		has_wall_at(t_mlx *mlx, double x, double y);
 float	distance_between_points(float x1, float y1, float x2, float y2);
-unsigned int	create_rgb(unsigned char r, unsigned char g, unsigned char b);
 
 //		PLAYER
 int		is_valid_player_id(t_mlx *mlx, int index);
 void	player_position(t_mlx *mlx);
 void	init_player(t_mlx *mlx);
 
+//		CASTING
+int		facing_up(t_mlx *mlx, int index);
+float	get_xsteph(t_mlx *mlx, int index);
+float	get_ysteph(t_mlx *mlx, int index);
+float	get_xinterh(t_mlx *mlx, int index, float yintercept);
+float	get_yinterh(t_mlx *mlx, int index);
+int		facing_left(t_mlx *mlx, int index);
+float	get_xstepv(t_mlx *mlx, int index);
+float	get_ystepv(t_mlx *mlx, int index);
+float	get_yinterv(t_mlx *mlx, int index, float xintercept);
+float	get_xinterv(t_mlx *mlx, int index);
 #endif
