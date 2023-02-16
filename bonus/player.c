@@ -6,7 +6,7 @@
 /*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 08:18:32 by oessamdi          #+#    #+#             */
-/*   Updated: 2023/02/11 05:30:00 by oessamdi         ###   ########.fr       */
+/*   Updated: 2023/02/11 03:17:52 by oessamdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	init_player(t_mlx *mlx)
 {
 	mlx->plyr->x = 0;
 	mlx->plyr->y = 0;
-	mlx->plyr->radius = 4;
+	mlx->plyr->radius = 20;
 	mlx->plyr->turn_direction = 0;
 	mlx->plyr->walk_direction = 0;
 	mlx->plyr->rotation_angle = PI / 2;

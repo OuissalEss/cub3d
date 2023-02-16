@@ -6,11 +6,22 @@
 /*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 09:31:43 by oessamdi          #+#    #+#             */
-/*   Updated: 2023/02/10 06:54:58 by oessamdi         ###   ########.fr       */
+/*   Updated: 2023/02/11 05:15:27 by oessamdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	increment_step(float *xinter, float xstep, float *yinter, float ystep)
+{
+	float	x;
+	float	y;
+
+	x = *xinter + xstep;
+	y = *yinter + ystep;
+	*xinter = x;
+	*yinter = y;
+}
 
 // Horizontal Ray-Grid Intersection Code
 int	found_horz_wall(t_mlx *mlx, int index)
@@ -35,8 +46,8 @@ int	found_horz_wall(t_mlx *mlx, int index)
 		}
 		else
 		{
-			xinter += xstep;
-			yinter += ystep;
+			horz_door_at(mlx, index, xinter, yinter - facing_up(mlx, index));
+			increment_step(&xinter, xstep, &yinter, ystep);
 		}
 	}
 	return (0);
@@ -65,8 +76,8 @@ int	found_vert_wall(t_mlx *mlx, int index)
 		}
 		else
 		{
-			xinter += xstep;
-			yinter += ystep;
+			vert_door_at(mlx, index, xinter - facing_left(mlx, index), yinter);
+			increment_step(&xinter, xstep, &yinter, ystep);
 		}
 	}
 	return (0);

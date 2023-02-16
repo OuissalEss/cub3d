@@ -6,7 +6,7 @@
 /*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 08:01:17 by oessamdi          #+#    #+#             */
-/*   Updated: 2023/02/11 05:16:21 by oessamdi         ###   ########.fr       */
+/*   Updated: 2023/02/11 05:00:32 by oessamdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
+# include "parsing/parsing.h"
 
 # define PI 3.14159265
 
@@ -53,9 +54,7 @@
 # define WALL_STRIP_WIDTH 1
 # define NUM_RAYS WIN_H
 
-# define SCALE 0.005
-
-# include "parsing/parsing.h"
+# define SCALE 0.05
 
 typedef struct s_img
 {
@@ -88,6 +87,13 @@ typedef struct s_ray{
 	int		wall_height;
 	int		top_wall;
 	int		bottom_wall;
+	float	door_x;
+	float	door_y;
+	float	horz_door_hit_x;
+	float	horz_door_hit_y;
+	float	vert_door_hit_x;
+	float	vert_door_hit_y;
+	int		vert_door;
 }				t_ray;
 
 typedef struct s_map
@@ -101,6 +107,7 @@ typedef struct s_map
 	t_img			*so;
 	t_img			*we;
 	t_img			*ea;
+	t_img			*d;
 }				t_map;
 
 typedef struct s_player
@@ -155,6 +162,7 @@ void	cast(t_mlx *mlx, int index);
 
 //		3D
 void	render_3d_projected_walls(t_ray **rays, t_mlx *mlx);
+void	render_3d_projected_doors(t_ray **rays, t_mlx *mlx);
 void	draw_f_c(t_mlx *mlx);
 
 //		UTILS
@@ -163,6 +171,7 @@ void	put_pixel(t_mlx *mlx, int x, int y, unsigned int color);
 void	mlx_rectangle(t_mlx *mlx, int x, int y, int color);
 int		has_wall_at(t_mlx *mlx, double x, double y);
 float	distance_between_points(float x1, float y1, float x2, float y2);
+void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
 
 //		PLAYER
 int		is_valid_player_id(t_mlx *mlx, int index);
@@ -180,11 +189,16 @@ float	get_xstepv(t_mlx *mlx, int index);
 float	get_ystepv(t_mlx *mlx, int index);
 float	get_yinterv(t_mlx *mlx, int index, float xintercept);
 float	get_xinterv(t_mlx *mlx, int index);
+void	horz_door_at(t_mlx *mlx, int index, double x, double y);
+void	vert_door_at(t_mlx *mlx, int index, double x, double y);
+float	get_door_distance(t_mlx *mlx, int i);
 
 //		TEXTURES
 void	get_textures(t_mlx *mlx, t_game *game);
 void	error_path(void);
-void	calcul(t_mlx *mlx, t_ray *ray, int x);
+void	calcul(t_mlx *mlx, t_ray *ray, int x, int door);
+void	calcul_door(t_mlx *mlx, t_ray *ray, int x);
+void	door_add(t_mlx *mlx, t_ray *ray, int i, int x);
 void	east_add(t_mlx *mlx, t_ray *ray, int i, int x);
 void	west_add(t_mlx *mlx, t_ray *ray, int i, int x);
 void	south_add(t_mlx *mlx, t_ray *ray, int i, int x);

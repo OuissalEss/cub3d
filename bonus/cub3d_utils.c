@@ -6,7 +6,7 @@
 /*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 08:01:13 by oessamdi          #+#    #+#             */
-/*   Updated: 2023/02/10 06:56:14 by oessamdi         ###   ########.fr       */
+/*   Updated: 2023/02/11 03:15:48 by oessamdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,8 @@ void	update_window(t_mlx *mlx)
 	update_player(mlx);
 	cast_all_rays(mlx);
 	render_3d_projected_walls(mlx->ray, mlx);
+	render_3d_projected_doors(mlx->ray, mlx);
+	draw_map(mlx);
+	draw_player(mlx);
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win, mlx->img->img_ptr, 0, 0);
 }

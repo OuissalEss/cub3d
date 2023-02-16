@@ -6,16 +6,11 @@
 /*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 09:33:36 by oessamdi          #+#    #+#             */
-/*   Updated: 2023/02/11 06:10:57 by oessamdi         ###   ########.fr       */
+/*   Updated: 2023/02/11 05:00:52 by oessamdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-unsigned int	create_rgb(unsigned char r, unsigned char g, unsigned char b)
-{
-	return ((r << 16) | (g << 8) | b);
-}
 
 void	mlx_rectangle(t_mlx *mlx, int x, int y, int color)
 {
@@ -54,7 +49,7 @@ void	render_3d_projected_walls(t_ray **rays, t_mlx *mlx)
 		wall_strip_height = (TAIL / (ray->distance * cos(ray->ray_angle
 						- mlx->plyr->rotation_angle))) * ((WIN_W / 2)
 				/ tan(FOV_ANGLE / 2));
-		y = ((WIN_H / 2) - wall_strip_height / 2);
+		y = ((WIN_H / 2) - (wall_strip_height / 2));
 		ray->wall_height = wall_strip_height;
 		if (y < 0)
 			y = 0;
@@ -62,7 +57,7 @@ void	render_3d_projected_walls(t_ray **rays, t_mlx *mlx)
 		ray->bottom_wall = (WIN_H / 2) + (ray->wall_height / 2);
 		if (ray->bottom_wall > WIN_H)
 			ray->bottom_wall = WIN_H;
-		calcul(mlx, ray, x);
+		calcul(mlx, ray, x, 0);
 		x++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 07:56:08 by oessamdi          #+#    #+#             */
-/*   Updated: 2023/02/10 06:57:16 by oessamdi         ###   ########.fr       */
+/*   Updated: 2023/02/11 04:18:21 by oessamdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ void	init_ray(t_ray	*ray, float ray_angle)
 	ray->is_ray_facing_right
 		= (ray->ray_angle < 0.5 * M_PI || ray->ray_angle > 1.5 * M_PI);
 	ray->is_ray_facing_left = !ray->is_ray_facing_right;
+	ray->horz_door_hit_x = -1;
+	ray->vert_door_hit_x = -1;
+	ray->horz_door_hit_y = -1;
+	ray->vert_door_hit_y = -1;
+	ray->door_x = -1;
 }
 
 void	cast_all_rays(t_mlx *mlx)

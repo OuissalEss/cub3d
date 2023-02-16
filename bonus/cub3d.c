@@ -6,7 +6,7 @@
 /*   By: oessamdi <oessamdi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 08:05:17 by oessamdi          #+#    #+#             */
-/*   Updated: 2023/02/11 05:44:00 by oessamdi         ###   ########.fr       */
+/*   Updated: 2023/02/11 05:00:45 by oessamdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	loop(t_mlx *mlx)
 	mlx_hook(mlx->win, 2, 1L << 0, key_press, mlx);
 	mlx_hook(mlx->win, 03, 1L << 1, key_release, mlx);
 	mlx_hook(mlx->win, 17, 1L << 5, escp_handler, mlx);
+	mlx_hook(mlx->win, 6, 1L << 6, mouse_move, mlx);
 	mlx_loop(mlx->mlx_ptr);
 }
 
